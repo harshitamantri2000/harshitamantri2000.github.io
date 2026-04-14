@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiteScan Redesign — Case Study · Harshita Mantri</title>
+  <meta name="description" content="Redesigning SiteScan to improve TAT & drive adoption — a B2B compliance scanning tool built by IDfy for payment gateway companies.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- Side Nav -->
+  <nav class="cs-sidenav" aria-label="Case study sections">
+    <ul class="cs-sidenav-list">
+      <li><a href="#s-context"   class="cs-sidenav-link">01 · Context</a></li>
+      <li><a href="#s-problem"   class="cs-sidenav-link">02 · Problem</a></li>
+      <li><a href="#s-users"     class="cs-sidenav-link">03 · Who Are the Users?</a></li>
+      <li><a href="#s-research"  class="cs-sidenav-link">04 · Research</a></li>
+      <li><a href="#s-v1"        class="cs-sidenav-link">05 · V1</a></li>
+      <li><a href="#s-iteration" class="cs-sidenav-link">06 · Iteration & Feedback</a></li>
+      <li><a href="#s-v2"        class="cs-sidenav-link">07 · V2</a></li>
+      <li><a href="#s-testing"   class="cs-sidenav-link">08 · Usability Testing</a></li>
+      <li><a href="#s-impact"    class="cs-sidenav-link">09 · Impact</a></li>
+      <li><a href="#s-takeaways" class="cs-sidenav-link">10 · Key Takeaways</a></li>
+    </ul>
+  </nav>
+
+  <!-- Nav -->
+  <nav class="cs-nav">
+    <div class="cs-nav-inner">
+      <a href="../index.html" class="cs-nav-back">← Back to Portfolio</a>
+      <span class="cs-nav-title">SiteScan · Case Study</span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="cs-hero">
+    <div class="cs-hero-inner">
+      <div class="cs-tag reveal">IDfy · Senior Product Designer · 2023</div>
+      <h1 class="cs-title reveal">Redesigning SiteScan to Improve TAT & Drive Adoption</h1>
+      <p class="cs-subtitle reveal">
+        A B2B compliance scanning tool built by IDfy for payment gateway companies
+        (like Razorpay) to verify merchant websites against regulatory requirements.
+      </p>
+      <div class="cs-meta-row reveal">
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">My Role</div>
+          <div class="cs-meta-val">Lead Product Designer</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Timeline</div>
+          <div class="cs-meta-val">2023</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Type</div>
+          <div class="cs-meta-val">B2B SaaS Redesign · Compliance</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Users</div>
+          <div class="cs-meta-val">Ops agents at Razorpay</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Tools</div>
+          <div class="cs-meta-val">Figma · FigJam</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cover -->
+  <div class="cs-cover">
+    <div class="cs-cover-inner">
+      <div class="cs-cover-frame">
+        <div class="browser-bar">
+          <span class="dot-r"></span>
+          <span class="dot-y"></span>
+          <span class="dot-g"></span>
+          <div class="browser-url">app.idfy.com / SiteScan / Summary</div>
+        </div>
+        <img src="../assets/images/ss_cover.png" alt="SiteScan — Cover">
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="cs-body">
+    <div class="cs-body-inner">
+
+      <!-- Context -->
+      <div class="cs-section" id="s-context">
+        <div class="cs-section-label reveal">01 · Context</div>
+        <h2 class="cs-section-title reveal">What is SiteScan?</h2>
+        <p class="cs-p reveal">
+          When payment companies onboard online merchants, they need to check if the
+          merchant's website meets all regulatory compliance requirements. IDfy built
+          <strong>SiteScan</strong> for exactly this — an automated compliance scanner.
+        </p>
+      </div>
+
+      <!-- Problem -->
+      <div class="cs-section" id="s-problem">
+        <div class="cs-section-label reveal">02 · Problem</div>
+        <h2 class="cs-section-title reveal">The tool had become an afterthought.</h2>
+        <p class="cs-p reveal">
+          The current SiteScan tool was <strong>slow, hard to use, and often unreliable</strong>. This led to:
+        </p>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">😤</div>
+            <div class="cs-card-title">Frustrated Users</div>
+            <div class="cs-card-desc">Agents didn't believe the scan results. They'd check the site manually first, then run the scan just to get something to show.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">🔁</div>
+            <div class="cs-card-title">Repeated Manual Effort</div>
+            <div class="cs-card-desc">Manual checks first, SiteScan second — just to generate proof. The automation tool was being used as a screenshot generator.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">📉</div>
+            <div class="cs-card-title">Low Trust in System</div>
+            <div class="cs-card-desc">Agents ended up doing manual checks first and used SiteScan only to generate proof — defeating its purpose as an automation tool.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users -->
+      <div class="cs-section" id="s-users">
+        <div class="cs-section-label reveal">03 · Who Are the Users?</div>
+        <h2 class="cs-section-title reveal">Operations agents are the core users.</h2>
+        <p class="cs-p reveal">
+          <strong>Their workflow involves:</strong>
+        </p>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">1️⃣</div>
+            <div class="cs-card-title">Review</div>
+            <div class="cs-card-desc">Reviewing a merchant's website</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">2️⃣</div>
+            <div class="cs-card-title">Scan</div>
+            <div class="cs-card-desc">Using SiteScan to scan for required compliance elements</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">3️⃣</div>
+            <div class="cs-card-title">Download</div>
+            <div class="cs-card-desc">Downloading the report as proof</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">4️⃣</div>
+            <div class="cs-card-title">Submit</div>
+            <div class="cs-card-desc">Submitting results internally or to clients if something is missing</div>
+          </div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:32px;">Why it matters to users</h3>
+        <p class="cs-p reveal">
+          Users handle <strong>15–20 verifications daily</strong>, often under time pressure.
+          For them, efficiency is critical. So we aimed to build a solution that:
+        </p>
+        <div class="cs-learnings reveal">
+          <div class="cs-learning">
+            <div class="cs-learning-num">01</div>
+            <div class="cs-learning-text">Reduces frustration and confusion</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">02</div>
+            <div class="cs-learning-text">Builds confidence in decision-making</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">03</div>
+            <div class="cs-learning-text">Aligns with their habits and daily flow</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">04</div>
+            <div class="cs-learning-text">Enables higher task volume with lower cognitive effort</div>
+          </div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:32px;">Why it matters to business</h3>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">🚀</div>
+            <div class="cs-card-title">Accelerates Merchant Onboarding</div>
+            <div class="cs-card-desc">Reduces turnaround time (TAT) and speeds up verification workflows.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">📈</div>
+            <div class="cs-card-title">Boosts Tool Adoption</div>
+            <div class="cs-card-desc">Empowers agents to work more efficiently, improving productivity and data reliability.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">🤝</div>
+            <div class="cs-card-title">Improves Client Retention</div>
+            <div class="cs-card-desc">Faster, more accurate onboarding leads to better merchant satisfaction and stronger relationships.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div class="cs-section" id="s-research">
+        <div class="cs-section-label reveal">04 · Research</div>
+        <h2 class="cs-section-title reveal">The issue wasn't one broken thing.<br>It was everything quietly working against the user.</h2>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/ss_research_visual.png" alt="SiteScan — Research overview">
+          <div class="cs-img-caption">Research approach — auditing the tool and interviewing ops agents</div>
+        </div>
+        <p class="cs-p reveal">
+          Before any user interviews, I audited the tool myself. I went through the full flow
+          end-to-end, from a first-time user's perspective. <strong>I do this before every project</strong>
+          — it means that by the time I'm in a conversation with users, I'm not asking broad questions.
+          I know exactly what to press on.
+        </p>
+        <p class="cs-p reveal">
+          I then interviewed top-performing ops agents at Razorpay — individually, in their actual
+          working context. Not a focus group. Not a survey. Just conversations and observation.
+        </p>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:24px;">What I Found</h3>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">🔓</div>
+            <div class="cs-card-title">Low Trust</div>
+            <div class="cs-card-desc">Agents didn't believe the scan results. So they'd check the site manually first, then run the scan to get something to show. The tool had gone from being the source of truth to being an afterthought.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">💾</div>
+            <div class="cs-card-title">Data Loss</div>
+            <div class="cs-card-desc">Switching tabs mid-flow, or accidentally closing the browser, wiped everything. When you're doing this 15 times a day, losing your place is genuinely demoralising.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">🎨</div>
+            <div class="cs-card-title">Clutter</div>
+            <div class="cs-card-desc">There were tabs no one opened, sections that didn't map to any real task, colours and icons fighting each other. The UI demanded attention without earning it.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👁️</div>
+            <div class="cs-card-title">Visual Clarity</div>
+            <div class="cs-card-desc">Agents couldn't tell what was clickable, what was auto-filled, or what an action would do. Every step involved a small moment of doubt. Multiply that by 20 merchants a day and it adds up.</div>
+          </div>
+        </div>
+        <p class="cs-p reveal" style="margin-top:20px; font-style:italic;">
+          Users didn't need more features. They needed the tool to be reliable, and give them accuracy.
+        </p>
+      </div>
+
+      <!-- V1 -->
+      <div class="cs-section" id="s-v1">
+        <div class="cs-section-label reveal">05 · V1 — Cleanup & Task Flow Alignment</div>
+        <h2 class="cs-section-title reveal">Clear the clutter, simplify workflows, align with the user's mental flow.</h2>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:32px;">Scan Initiation Page</h3>
+        <p class="cs-p reveal">
+          To streamline the experience, I removed non-essential inputs and unused sections like
+          'Dashboard' and 'Add Users' that created noise without adding real value to the user's
+          workflow. I reduced heavy shadows, cluttered icons, and overwhelming colours to create
+          a cleaner, calmer interface.
+        </p>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/ss_v1_scan_init.png" alt="SiteScan V1 — Cleaned up scan initiation page">
+          <div class="cs-img-caption">V1 — Streamlined scan initiation with non-essential inputs removed</div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:32px;">Results After Scan</h3>
+        <p class="cs-p reveal">
+          You see the summary grid → you identify the problem area → you scroll to that section → you take action (Preview or Custom Add). That's a coherent task flow.
+        </p>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/ss_v1_results.png" alt="SiteScan V1 — Results page with summary grid">
+          <div class="cs-img-caption">V1 — Results view with compliance checks and policy pages</div>
+        </div>
+
+        <p class="cs-p reveal" style="margin-top:16px;">The results broke down into two key areas:</p>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">1. Compliance Checks</div>
+            <div class="cs-card-desc">Automated verification of regulatory requirements on the merchant's website.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">📄</div>
+            <div class="cs-card-title">2. Policy Pages</div>
+            <div class="cs-card-desc">Verification of required policy pages (returns, shipping, privacy, terms) and their content.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Concepts / Iterations -->
+      <div class="cs-section" id="s-iteration">
+        <div class="cs-section-label reveal">06 · Iteration & Feedback</div>
+        <h2 class="cs-section-title reveal">Two concepts, one clear winner.</h2>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:24px;">Concept 1</h3>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/ss_concept1.png" alt="SiteScan Concept 1">
+          <div class="cs-img-caption">Concept 1 — Sidebar navigation approach</div>
+        </div>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">👎</div>
+            <div class="cs-card-title">Overwhelming Sidebar Navigation</div>
+            <div class="cs-card-desc">It gives the impression of depth but actually makes it harder to know where you are or where to go next.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👎</div>
+            <div class="cs-card-title">Missing Action Clarity</div>
+            <div class="cs-card-desc">What do I do with "Invalid"? The next step is never obvious.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👎</div>
+            <div class="cs-card-title">Decorative Previews</div>
+            <div class="cs-card-desc">The Preview thumbnails on the right are a genuinely good idea — seeing the actual page gives context — but they're too small to be useful and feel decorative rather than functional.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👎</div>
+            <div class="cs-card-title">Inconsistent Status Tags</div>
+            <div class="cs-card-desc">Status communication tags exist but feel inconsistent — different patterns in different places, no unified visual language.</div>
+          </div>
+        </div>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/ss_concept1_feedback.png" alt="SiteScan Concept 1 — Feedback details">
+          <div class="cs-img-caption">Concept 1 feedback — sidebar navigation and action clarity issues</div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:40px;">Concept 2 (Winner)</h3>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/ss_concept2.png" alt="SiteScan Concept 2">
+          <div class="cs-img-caption">Concept 2 — Summary grid approach</div>
+        </div>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">👍</div>
+            <div class="cs-card-title">Instant Full Picture</div>
+            <div class="cs-card-desc">Summary grid gives the agent an instant read of the full picture before they scroll into anything. Problems are visible immediately, and the agent knows where to focus before touching the detail below.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👍</div>
+            <div class="cs-card-title">Visually Quieter & Trustworthy</div>
+            <div class="cs-card-desc">White cards, clean typography, subtle borders. The UI stopped fighting for attention.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👍</div>
+            <div class="cs-card-title">Tags Doing Real Work</div>
+            <div class="cs-card-desc">The compliance tags (Approved, Needs Improvement, Non-Compliant) are doing real work — the agent never has to interpret raw data to understand the status.</div>
+          </div>
+        </div>
+        <div class="cs-cards reveal" style="margin-top:12px;">
+          <div class="cs-card">
+            <div class="cs-card-icon">⚠️</div>
+            <div class="cs-card-title">Generic Page Naming</div>
+            <div class="cs-card-desc">The "Page-1", "Page-2" naming is generic and slightly confusing. If an agent needs to go back and reference something, "Page-1 under Shipping & Delivery" is not a clear mental anchor. Even showing the actual page URL or a truncated page title would make this far more useful.</div>
+          </div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:40px;">3. Preview (Policy Page)</h3>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/ss_preview_policy.png" alt="SiteScan — Policy page preview with scan findings">
+          <div class="cs-img-caption">Preview — Scan findings shown alongside the policy page screenshot</div>
+        </div>
+        <p class="cs-p reveal">
+          When a user clicks on Preview, they see the full page but have no idea what they're
+          looking for or what the scan found. They end up manually reading the whole page —
+          which is exactly the behaviour I'm trying to eliminate.
+        </p>
+        <p class="cs-p reveal">
+          Since we had <strong>backend limitations for new developments</strong>, instead of highlighting
+          directly on the screenshot, I brought the scan findings alongside it. Users can now
+          look at the screenshot with context and cross-reference visually themselves. It's not
+          as precise as highlighted regions, but it gives them enough to do their job without
+          switching back and forth.
+        </p>
+      </div>
+
+      <!-- V2 -->
+      <div class="cs-section" id="s-v2">
+        <div class="cs-section-label reveal">07 · V2 — Decision Support & Habit Shaping</div>
+        <h2 class="cs-section-title reveal">One screen that changed how agents used the tool.</h2>
+        <p class="cs-p reveal">
+          V1 made the tool easier to use. Earlier I focused on <strong>UI hygiene</strong> — decluttering
+          the interface and aligning flows with user behaviour. While necessary, these changes
+          didn't fundamentally alter how users interacted with the tool.
+        </p>
+        <p class="cs-p reveal">
+          In V2, I introduced one key shift: <strong>the Summary Page</strong>.
+        </p>
+        <p class="cs-p reveal">
+          One screen that loads right after a scan finishes, giving a full picture before you go
+          anywhere else. What's clean. What's flagged. Where you need to look. On one screen.
+        </p>
+        <p class="cs-p reveal">
+          It sounds like a small thing. But it fundamentally shifted the interaction. Instead of using
+          the tool to confirm what they'd already found manually, <strong>agents started opening it
+          first</strong> — because it was now actually telling them something useful upfront. That's
+          the shift we were after.
+        </p>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/ss_v2_summary.png" alt="SiteScan V2 — Summary Page">
+          <div class="cs-img-caption">V2 Summary Page — the single screen that shifted agent behaviour</div>
+        </div>
+      </div>
+
+      <!-- Usability Testing -->
+      <div class="cs-section" id="s-testing">
+        <div class="cs-section-label reveal">08 · Usability Testing After V2</div>
+        <h2 class="cs-section-title reveal">Testing with real users, real tasks.</h2>
+
+        <p class="cs-p reveal">
+          <strong>🔍 Objective:</strong> To evaluate whether the newly introduced Summary Page and
+          backend improvements (scan speed & accuracy) were actually improving the experience.
+        </p>
+        <p class="cs-p reveal">
+          <strong>🧪 Testing Setup:</strong> Tested with <strong>5–7 frequent users from Razorpay</strong>
+          and 2–3 internal users. Users were asked to perform real-world tasks on the staging environment.
+          Collected a mix of qualitative feedback (what they said, liked, or found confusing) and
+          behavioural observations (where they struggled, hesitated, or skipped).
+        </p>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:28px;">💡 What worked well</h3>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Summary Page</div>
+            <div class="cs-card-desc">Helped agents quickly identify compliance issues.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Highlighted Sections in Policies</div>
+            <div class="cs-card-desc">Reduced scanning effort significantly.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">More Accurate MCC Codes</div>
+            <div class="cs-card-desc">Reduced manual checking — agents trusted the categorisation.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Smoother Navigation Flow</div>
+            <div class="cs-card-desc">Navigation felt smoother and more intuitive.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Individual Highlights</div>
+            <div class="cs-card-desc">Boosted confidence in overall results.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Cleaner UI</div>
+            <div class="cs-card-desc">UI felt cleaner and easier on the eyes.</div>
+          </div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:28px;">What still needed work</h3>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">⚠️</div>
+            <div class="cs-card-title">Icon Meanings</div>
+            <div class="cs-card-desc">Some users were still confused about what certain icons meant.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">⚠️</div>
+            <div class="cs-card-title">Policy Page Clutter</div>
+            <div class="cs-card-desc">Policy page layout felt cluttered with too much scrolling.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">⚠️</div>
+            <div class="cs-card-title">No Exact Location Highlighting</div>
+            <div class="cs-card-desc">In the Policy Page, issues are listed by page name but not highlighted at the exact location (line or paragraph), forcing users to manually scan and locate the problem areas.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✏️</div>
+            <div class="cs-card-title">Quick Wins Shipped</div>
+            <div class="cs-card-desc">Some minor improvements — like adding clear labels to icons — were directly pushed to production to enhance usability quickly.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact -->
+      <div class="cs-section" id="s-impact">
+        <div class="cs-section-label reveal">09 · Impact</div>
+        <h2 class="cs-section-title reveal">Results that shipped.</h2>
+        <div class="cs-impact reveal">
+          <div class="cs-impact-item">
+            <div class="cs-impact-val">60%</div>
+            <div class="cs-impact-label">TAT reduction — users could now identify and resolve compliance issues faster</div>
+          </div>
+          <div class="cs-impact-item">
+            <div class="cs-impact-val">4–5★</div>
+            <div class="cs-impact-label">NPS ratings improved from mostly 1–2 stars, reflecting higher satisfaction</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Takeaways -->
+      <div class="cs-section" id="s-takeaways">
+        <div class="cs-section-label reveal">10 · Key Takeaways</div>
+        <h2 class="cs-section-title reveal">What this project taught me.</h2>
+        <div class="cs-learnings reveal">
+          <div class="cs-learning">
+            <div class="cs-learning-num">01</div>
+            <div class="cs-learning-text"><strong>Design alone isn't enough.</strong> Real improvement happens when design and backend work hand-in-hand. You can't gain user trust with just a cleaner UI — the functionality has to deliver.</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">02</div>
+            <div class="cs-learning-text"><strong>Understand the mental model, not just screens.</strong> It's crucial to understand the user's mental model and workflow — not just map screens. Agents think in terms of "merchant decisions", not "scan tabs".</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">03</div>
+            <div class="cs-learning-text"><strong>Habits take time to shift.</strong> Especially with operations folks, you can't flip their habits overnight. They've been doing things a certain way for months — change needs to feel natural, not forced.</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">04</div>
+            <div class="cs-learning-text"><strong>Observation beats assumptions.</strong> Sometimes, users can't articulate what's broken — but their behaviour tells you everything. Observation over assumptions, always.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" style="max-width:760px; margin:0 auto; padding:20px 24px;">
+    <a href="../index.html" style="color:var(--sub-text); font-size:13px;">← Back to Portfolio</a>
+    <span style="color:var(--tag-text); font-size:13px;">Harshita Mantri · SiteScan Case Study</span>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
