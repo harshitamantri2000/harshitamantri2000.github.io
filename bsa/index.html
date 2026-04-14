@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Intelligence Platform — Case Study · Harshita Mantri</title>
+  <meta name="description" content="Designing the only tool underwriters & lenders need to understand a borrower's true repayment capacity. 80% TAT reduction.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- Side Nav -->
+  <nav class="cs-sidenav" aria-label="Case study sections">
+    <ul class="cs-sidenav-list">
+      <li><a href="#s-overview"     class="cs-sidenav-link">01 · Overview</a></li>
+      <li><a href="#s-problem"      class="cs-sidenav-link">02 · Problem</a></li>
+      <li><a href="#s-research"     class="cs-sidenav-link">03 · Market Insights</a></li>
+      <li><a href="#s-users"        class="cs-sidenav-link">04 · Who We're Designing For</a></li>
+      <li><a href="#s-architecture" class="cs-sidenav-link">05 · Solution Architecture</a></li>
+      <li><a href="#s-wireframes"   class="cs-sidenav-link">06 · Wireframes</a></li>
+      <li><a href="#s-decisions"    class="cs-sidenav-link">07 · Key Design Decisions</a></li>
+      <li><a href="#s-analytics"    class="cs-sidenav-link">08 · Analytics</a></li>
+      <li><a href="#s-challenges"   class="cs-sidenav-link">09 · Challenges</a></li>
+      <li><a href="#s-impact"       class="cs-sidenav-link">10 · Impact</a></li>
+      <li><a href="#s-takeaways"    class="cs-sidenav-link">11 · Key Takeaways</a></li>
+    </ul>
+  </nav>
+
+  <!-- Nav -->
+  <nav class="cs-nav">
+    <div class="cs-nav-inner">
+      <a href="../index.html" class="cs-nav-back">← Back to Portfolio</a>
+      <span class="cs-nav-title">Transaction Intelligence · Case Study</span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="cs-hero">
+    <div class="cs-hero-inner">
+      <div class="cs-tag reveal">IDfy · Senior Product Designer · 2023</div>
+      <h1 class="cs-title reveal">Transaction Intelligence Platform</h1>
+      <p class="cs-subtitle reveal">
+        Designing the only tool underwriters and lenders need to understand a borrower's
+        true repayment capacity.
+      </p>
+      <div class="cs-meta-row reveal">
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">My Role</div>
+          <div class="cs-meta-val">Lead Product Designer</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Timeline</div>
+          <div class="cs-meta-val">2023</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Type</div>
+          <div class="cs-meta-val">0→1 B2B SaaS · Fintech</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Platform</div>
+          <div class="cs-meta-val">Web Application</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Tools</div>
+          <div class="cs-meta-val">Figma · FigJam</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cover -->
+  <div class="cs-cover">
+    <div class="cs-cover-inner">
+      <div class="cs-cover-frame">
+        <div class="browser-bar">
+          <span class="dot-r"></span>
+          <span class="dot-y"></span>
+          <span class="dot-g"></span>
+          <div class="browser-url">app.idfy.com / BSA / Analytics Dashboard</div>
+        </div>
+        <img src="../assets/images/bsa_cover.png" alt="Transaction Intelligence Platform — Cover">
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="cs-body">
+    <div class="cs-body-inner">
+
+      <!-- Overview -->
+      <div class="cs-section" id="s-overview">
+        <div class="cs-section-label reveal">01 · Overview</div>
+        <h2 class="cs-section-title reveal">What is BSA?</h2>
+        <p class="cs-p reveal">
+          Underwriters and lenders spend hours manually reading through bank statements —
+          cross-referencing transactions in Excel, second-guessing data accuracy, and still
+          making decisions on incomplete information. For smaller lenders, existing tools were
+          either too expensive or too complex to adopt.
+        </p>
+        <p class="cs-p reveal">
+          <strong>BSA analyzes bank transactions to surface real income, obligations, and spending
+          trends</strong> — giving lenders a clear picture of a borrower's true repayment capacity.
+          Built as a <strong>modular 3-API system</strong>, it lets lenders choose only what they need —
+          from basic document validation to full risk analytics.
+        </p>
+        <p class="cs-p reveal" style="font-style:italic;">
+          🔥 Impact: Assessment time dropped from 3 minutes to 29 seconds, with 5 new clients
+          onboarded since launch.
+        </p>
+      </div>
+
+      <!-- Problem -->
+      <div class="cs-section" id="s-problem">
+        <div class="cs-section-label reveal">02 · Problem</div>
+        <h2 class="cs-section-title reveal">Underwriters were flying blind.</h2>
+        <p class="cs-p reveal">
+          Lending decisions are high-stakes and time-sensitive. But the tools available —
+          particularly for SMEs and smaller NBFCs — were <strong>slow, expensive, or built for
+          enterprise scale</strong>. The result: assessments made from incomplete data, at high
+          turnaround cost, with significant fraud exposure.
+        </p>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:24px;">Core Issues</h3>
+        <div class="cs-learnings reveal">
+          <div class="cs-learning">
+            <div class="cs-learning-num">01</div>
+            <div class="cs-learning-text">Manual Excel-based analysis eating up hours per case</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">02</div>
+            <div class="cs-learning-text">Decisions made without confidence in document authenticity</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">03</div>
+            <div class="cs-learning-text">Tools priced out of reach for smaller lenders</div>
+          </div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:28px;">Key Constraints</h3>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">🚫</div>
+            <div class="cs-card-title">No Existing User Base</div>
+            <div class="cs-card-desc">No existing user base for testing — we were building from scratch.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">⚡</div>
+            <div class="cs-card-title">Fast Sprint Cycles</div>
+            <div class="cs-card-desc">Speed over perfection — tight development timelines demanded rapid decision-making.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">🎯</div>
+            <div class="cs-card-title">High Accuracy From Day One</div>
+            <div class="cs-card-desc">In lending, wrong data means wrong decisions. There was no room for "good enough" accuracy.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div class="cs-section" id="s-research">
+        <div class="cs-section-label reveal">03 · Market Insights</div>
+        <h2 class="cs-section-title reveal">Learning from the market.</h2>
+        <p class="cs-p reveal">
+          Leveraging a mix of <strong>SME stakeholder interviews and competitive benchmarking</strong>,
+          I analyzed the product ecosystems of Perfios, FinBox, and Glib. Through hands-on demos
+          and vendor consultations, I reverse-engineered the user journey to uncover consistent
+          friction points that existing market solutions fail to address.
+        </p>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_research.png" alt="Competitive benchmarking — Perfios, FinBox, Glib analysis">
+          <div class="cs-img-caption">Competitive benchmarking across Perfios, FinBox, and Glib</div>
+        </div>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">🐌</div>
+            <div class="cs-card-title">1. High Turnaround Time</div>
+            <div class="cs-card-desc">Despite automation claims, workflows slowed due to manual handling of scanned PDFs and non-standard formats.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">😤</div>
+            <div class="cs-card-title">2. Clunky Interfaces</div>
+            <div class="cs-card-desc">Outdated UIs made navigation frustrating — especially for non-technical SME owners who needed speed.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">📊</div>
+            <div class="cs-card-title">3. Unreadable Data Output</div>
+            <div class="cs-card-desc">Raw data dumps with no interpretation. Users had to invest time just to understand what the tool was telling them.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">💰</div>
+            <div class="cs-card-title">4. One-Size-Fits-All Pricing</div>
+            <div class="cs-card-desc">Enterprise pricing locked out smaller lenders — a large, underserved segment with real need for this tooling.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">📄</div>
+            <div class="cs-card-title">5. No Early Document Validation</div>
+            <div class="cs-card-desc">No way to catch incorrect or invalid documents before processing — wasting time and resources on bad inputs.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users -->
+      <div class="cs-section" id="s-users">
+        <div class="cs-section-label reveal">04 · Who We Are Designing For?</div>
+        <h2 class="cs-section-title reveal">Two users, one tool,<br>completely different jobs.</h2>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">👤</div>
+            <div class="cs-card-title">Underwriter / SME Lender</div>
+            <div class="cs-card-desc">Processes 10+ loan applications a day. Needs answers fast — not a tool to learn. Every extra click is friction they can't afford.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">🎤</div>
+            <div class="cs-card-title">Sales / Demo User</div>
+            <div class="cs-card-desc">Showcases BSA to credit heads and NBFCs evaluating vendors. Needs to explore every feature and make it look effortless. The demo is the pitch.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution Architecture -->
+      <div class="cs-section" id="s-architecture">
+        <div class="cs-section-label reveal">05 · Solution Architecture</div>
+        <h2 class="cs-section-title reveal">Three modules, not one monolith.</h2>
+        <p class="cs-p reveal">
+          Rather than one unified product, we split the solution based on use case.
+          The trigger: data showed <strong>12% of users submit incorrect documents at step one</strong> —
+          catching that early saves everyone time. A modular approach also lets clients pay only
+          for what they need.
+        </p>
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">PreCheck</div>
+            <div class="cs-card-desc">Identifies incorrect documents at the initial stage, reducing delays and frustration for lenders.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">📋</div>
+            <div class="cs-card-title">Excel Extraction</div>
+            <div class="cs-card-desc">Extracts all relevant data from bank statements, ensuring accuracy and completeness.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">🔍</div>
+            <div class="cs-card-title">Comprehensive Analysis</div>
+            <div class="cs-card-desc">Provides deep insights for risk assessment and decision-making.</div>
+          </div>
+        </div>
+        <p class="cs-p reveal" style="margin-top:16px; font-style:italic;">
+          Why? This approach makes our solution flexible and scalable, allowing businesses to choose
+          what fits their needs — whether a simple document check or a full analysis.
+        </p>
+      </div>
+
+      <!-- Wireframes -->
+      <div class="cs-section" id="s-wireframes">
+        <div class="cs-section-label reveal">06 · Wireframes</div>
+        <h2 class="cs-section-title reveal">Exploring the structure.</h2>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_wireframes.png" alt="BSA wireframes — exploring layout and flow">
+          <div class="cs-img-caption">Early wireframes — mapping the information architecture and flow</div>
+        </div>
+      </div>
+
+      <!-- Key Design Decisions -->
+      <div class="cs-section" id="s-decisions">
+        <div class="cs-section-label reveal">07 · Key Design Decisions</div>
+        <h2 class="cs-section-title reveal">The challenge: Two users. One tool.<br>Completely different jobs.</h2>
+        <p class="cs-p reveal">
+          Underwriters process applications under deadline — every extra decision is friction.
+          Sales teams run demos for credit heads and NBFCs — every hidden feature is a missed opportunity.
+        </p>
+        <p class="cs-p reveal">
+          Designing one interface for both would have meant compromising both.
+        </p>
+        <p class="cs-p reveal">
+          <strong>The decision: Two flows, built around job to be done.</strong>
+        </p>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:36px;">Sales Flow</h3>
+        <p class="cs-p reveal">
+          The sales flow is visual, exploratory, and feature-complete — designed to impress and
+          let clients discover the full depth of the product.
+        </p>
+        <p class="cs-p reveal">
+          👉🏻 The sales team can showcase all possible approaches through which a statement can be
+          fetched, and let clients explore the option that fits their needs best.
+        </p>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_sales_flow.png" alt="BSA Sales Flow — exploratory, feature-complete">
+          <div class="cs-img-caption">Sales Flow — showcase all possible approaches for statement fetching</div>
+        </div>
+        <p class="cs-p reveal">
+          👉🏻 A step-by-step process gives users the context of each offering — configuration options
+          are presented descriptively, giving clients time to understand the full range of capabilities
+          and features available.
+        </p>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_sales_step.png" alt="BSA Sales — step-by-step configuration">
+          <div class="cs-img-caption">Step-by-step process with configuration options presented descriptively</div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:36px;">Underwriter Flow</h3>
+        <p class="cs-p reveal">
+          The underwriter flow strips everything non-essential. Anything that can be configured
+          through the backend is handled upfront — assessment type, package selection — so
+          underwriters don't have to think about it. <strong>They just upload and go.</strong>
+        </p>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_underwriter_flow1.png" alt="BSA Underwriter Flow — stripped down, fast">
+          <div class="cs-img-caption">Underwriter Flow — minimal steps, backend-configured, just upload and go</div>
+        </div>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_underwriter_flow2.png" alt="BSA Underwriter Flow — upload interface">
+          <div class="cs-img-caption">Underwriter Flow — streamlined upload experience</div>
+        </div>
+      </div>
+
+      <!-- From Data Dump to Decision Surface -->
+      <div class="cs-section" id="s-analytics">
+        <div class="cs-section-label reveal">08 · From Data Dump to Decision Surface</div>
+        <h2 class="cs-section-title reveal">Advanced analytics was one of<br>our key differentiators.</h2>
+        <p class="cs-p reveal">
+          While competitors handed users raw Excel dumps and left them to figure it out, the goal
+          here was to build an <strong>insights dashboard that surfaces patterns</strong> — so lenders
+          could read a borrower's financial story without opening a single spreadsheet.
+        </p>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:36px;">Iteration 1</h3>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_iteration1.png" alt="BSA Analytics — First Iteration">
+          <div class="cs-img-caption">First iteration of the analytics dashboard</div>
+        </div>
+
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">👍</div>
+            <div class="cs-card-title">Debt & Obligation Breakdown</div>
+            <div class="cs-card-desc">Showed how much of total income goes towards EMIs, loans etc. Gave lenders an immediate read on repayment pressure.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👍</div>
+            <div class="cs-card-title">Risk Triggers & Alerts Upfront</div>
+            <div class="cs-card-desc">Risk triggers and alerts were surfaced upfront — lenders could focus directly on the risk aspects of a statement without having to hunt for them.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👎</div>
+            <div class="cs-card-title">No Account-level Fraud Visibility</div>
+            <div class="cs-card-desc">In a multi-account scenario, there was no way to tell which specific account was tampered or problematic. The information existed but was buried deep in the profile section.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👎</div>
+            <div class="cs-card-title">Cashflow Chart Was Misleading</div>
+            <div class="cs-card-desc">The chart was showing end-of-day balance instead of actual credit and debit movement. Lenders couldn't see inflow and outflow clearly — which is the core of what cashflow analysis needs.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👎</div>
+            <div class="cs-card-title">Context Lost Through Tab Switching</div>
+            <div class="cs-card-desc">Basic account information required switching tabs. Every tab switch broke the lender's train of thought — and in a high-pressure environment, losing context mid-analysis is a real cost.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">👎</div>
+            <div class="cs-card-title">Independent Time Filters Killed Cross-Chart Correlation</div>
+            <div class="cs-card-desc">Each chart had its own time period selector. A lender changing one chart's range had no way to compare it against another — making pattern recognition across the dashboard nearly impossible.</div>
+          </div>
+        </div>
+
+        <div class="cs-img-wrap reveal" style="margin-top:24px;">
+          <img src="../assets/images/bsa_iteration1_feedback.png" alt="BSA Iteration 1 — Feedback details">
+          <div class="cs-img-caption">Iteration 1 feedback — identifying what worked and what didn't</div>
+        </div>
+
+        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:40px;">Final Iteration</h3>
+        <p class="cs-p reveal">
+          The hardest part wasn't the layout — it was <strong>deciding which parameters actually
+          belonged in the overview</strong>. With so much financially relevant data, every metric felt
+          important. Too many numbers with no clear hierarchy meant lenders had no obvious place to start.
+        </p>
+        <p class="cs-p reveal">
+          Worked closely with PMs and analysts to understand what truly drives a lending decision,
+          and through several iterations, we landed on a structure that puts the right parameters upfront.
+        </p>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_final_dashboard.png" alt="BSA Analytics — Final Dashboard">
+          <div class="cs-img-caption">Final iteration — prioritised data hierarchy, single scrollable page</div>
+        </div>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_final_wide.png" alt="BSA Analytics — Final Dashboard wide view">
+          <div class="cs-img-caption">Final dashboard — full analytics view</div>
+        </div>
+
+        <div class="cs-cards reveal">
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Account-level Status Upfront</div>
+            <div class="cs-card-desc">The bank statements table at the top immediately tells the lender which account is tampered, which has a reconciliation failure, and which is genuine — before they've looked at a single chart.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Context-aware Summary</div>
+            <div class="cs-card-desc">Business borrowers see business metrics & individual borrowers see personal metrics. The screen now speaks the language of the borrower type.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Single Scrollable Page</div>
+            <div class="cs-card-desc">No tab switching. Everything a lender needs is in one continuous flow — they never lose context mid-analysis.</div>
+          </div>
+          <div class="cs-card">
+            <div class="cs-card-icon">✅</div>
+            <div class="cs-card-title">Risk Triggers Preserved & Quantified</div>
+            <div class="cs-card-desc">What worked in the old design stayed — and got sharper.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Challenges -->
+      <div class="cs-section" id="s-challenges">
+        <div class="cs-section-label reveal">09 · Challenges</div>
+        <h2 class="cs-section-title reveal">What made this hard.</h2>
+        <div class="cs-learnings reveal">
+          <div class="cs-learning">
+            <div class="cs-learning-num">01</div>
+            <div class="cs-learning-text"><strong>Data prioritisation.</strong> With an overwhelming amount of financial data across the product, deciding what belonged upfront and what didn't was never straightforward. Every parameter felt critical to someone — and without a clear hierarchy, there was no obvious place to start.</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">02</div>
+            <div class="cs-learning-text"><strong>Custom Charts.</strong> The second hit during development. The first iteration used fully custom chart implementations across the analytics screens. What looked right in design became a bottleneck in build — each chart took far longer to develop than anticipated. Midway through, we had to make hard calls — dropping some visualisations and replacing others with standard library components, without losing the analytical depth they were meant to deliver.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact -->
+      <div class="cs-section" id="s-impact">
+        <div class="cs-section-label reveal">10 · Impact</div>
+        <h2 class="cs-section-title reveal">Results that shipped.</h2>
+        <div class="cs-impact reveal">
+          <div class="cs-impact-item">
+            <div class="cs-impact-val">80%</div>
+            <div class="cs-impact-label">TAT reduction that allows to serve more clients in less time</div>
+          </div>
+          <div class="cs-impact-item">
+            <div class="cs-impact-val">5+</div>
+            <div class="cs-impact-label">New clients onboarded which directly impacts ARR and helps in market expansion</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Takeaways -->
+      <div class="cs-section" id="s-takeaways">
+        <div class="cs-section-label reveal">11 · Key Takeaways</div>
+        <h2 class="cs-section-title reveal">What this project taught me.</h2>
+        <div class="cs-learnings reveal">
+          <div class="cs-learning">
+            <div class="cs-learning-num">01</div>
+            <div class="cs-learning-text">Building a product from scratch was a unique opportunity that taught me <strong>the importance of speed</strong> and how to plan and execute within tight sprint cycles.</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">02</div>
+            <div class="cs-learning-text">In the absence of constant user feedback, I had to find <strong>creative ways to ensure that the product was still aligned with user needs</strong>. This taught me to be more skeptical and always open to feedback, iterating and refining the product as we went along. By staying adaptable and responsive.</div>
+          </div>
+          <div class="cs-learning">
+            <div class="cs-learning-num">03</div>
+            <div class="cs-learning-text">I learned how to <strong>prioritise features, balance speed with quality, and make informed decisions in the face of uncertainty</strong>. Ultimately, this experience reinforced the value of continuous learning and iteration in building successful products.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" style="max-width:760px; margin:0 auto; padding:20px 24px;">
+    <a href="../index.html" style="color:var(--sub-text); font-size:13px;">← Back to Portfolio</a>
+    <span style="color:var(--tag-text); font-size:13px;">Harshita Mantri · Transaction Intelligence Case Study</span>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
