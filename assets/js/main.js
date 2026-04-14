@@ -98,20 +98,26 @@ window.addEventListener('load', () => {
         if (idx === -1) return;
 
         if (entry.isIntersecting) {
-          // Find the section with the smallest positive top offset
-          let bestIdx = 0;
+          // Find nearest section: prefer closest below top of viewport, fall back to closest above
+          let bestIdx = -1;
           let bestTop = Infinity;
+          let closestAboveIdx = -1;
+          let closestAboveTop = -Infinity;
           sections.forEach((sec, i) => {
             const top = sec.getBoundingClientRect().top;
             if (top >= 0 && top < bestTop) {
               bestTop = top;
               bestIdx = i;
+            } else if (top < 0 && top > closestAboveTop) {
+              closestAboveTop = top;
+              closestAboveIdx = i;
             }
           });
-          if (bestIdx !== activeIndex) {
+          const chosen = bestIdx !== -1 ? bestIdx : closestAboveIdx;
+          if (chosen !== -1 && chosen !== activeIndex) {
             if (activeIndex !== -1) links[activeIndex].classList.remove('cs-sidenav-link--active');
-            links[bestIdx].classList.add('cs-sidenav-link--active');
-            activeIndex = bestIdx;
+            links[chosen].classList.add('cs-sidenav-link--active');
+            activeIndex = chosen;
           }
         }
       });
