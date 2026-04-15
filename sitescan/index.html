@@ -279,20 +279,6 @@
           <div class="cs-img-caption">V1 — Results view with compliance checks and policy pages</div>
         </div>
 
-        <p class="cs-p reveal" style="margin-top:16px;">The results broke down into two key areas:</p>
-        <div class="cs-cards reveal">
-          <div class="cs-card">
-            <div class="cs-card-icon">✅</div>
-            <div class="cs-card-title">1. Compliance Checks</div>
-            <div class="cs-card-desc">Automated verification of regulatory requirements on the merchant's website.</div>
-          </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">📄</div>
-            <div class="cs-card-title">2. Policy Pages</div>
-            <div class="cs-card-desc">Verification of required policy pages (returns, shipping, privacy, terms) and their content.</div>
-          </div>
-        </div>
-
         <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:48px;">Iteration & Feedback</h3>
         <p class="cs-p reveal" style="margin-top:4px; font-style:italic;">Two concepts, one clear winner.</p>
 
@@ -355,12 +341,17 @@
           <img src="../assets/images/ss_preview_policy.png" alt="SiteScan — Policy page preview with scan findings">
           <div class="cs-img-caption">Preview — Scan findings shown alongside the policy page screenshot</div>
         </div>
-        <p class="cs-p reveal">
-          When a user clicks on Preview, they see the full page but have no idea what they're
-          looking for or what the scan found. They end up manually reading the whole page —
-          which is exactly the behaviour I'm trying to eliminate.
-        </p>
-        <p class="cs-p reveal">
+        <div class="cs-cards reveal">
+          <div class="cs-card cs-card--negative">
+            <div class="cs-card-title">No Context on Scan Findings</div>
+            <div class="cs-card-desc">Users see the full page but have no idea what the scan found or where to look — no highlighted regions, no pointers.</div>
+          </div>
+          <div class="cs-card cs-card--negative">
+            <div class="cs-card-title">Forces Manual Reading</div>
+            <div class="cs-card-desc">Agents end up reading the entire page themselves — the exact behaviour the tool was meant to eliminate.</div>
+          </div>
+        </div>
+        <p class="cs-p reveal" style="margin-top:16px;">
           Since we had <span class="hl-rose"><strong>backend limitations for new developments</strong></span>, instead of highlighting
           directly on the screenshot, I brought the scan findings alongside it. Users can now
           look at the screenshot with context and cross-reference visually themselves. It's not
