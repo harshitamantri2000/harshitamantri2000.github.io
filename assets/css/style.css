@@ -867,6 +867,40 @@ ul { list-style: none; }
 }
 .cs-learning-text strong { color: var(--grey); font-weight: 500; }
 
+.cs-cards--3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cs-plain-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+}
+
+.cs-plain-item {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.cs-plain-item:first-child { border-top: 1px solid var(--card-border); }
+
+.cs-plain-num {
+  font-family: var(--font-hand);
+  font-size: 16px;
+  color: var(--tag-text);
+  min-width: 24px;
+  flex-shrink: 0;
+}
+
+.cs-plain-text {
+  font-size: 14px;
+  color: var(--sub-text);
+  line-height: 1.6;
+}
+
 .cs-callout {
   margin-top: 16px;
   padding: 14px 18px;
