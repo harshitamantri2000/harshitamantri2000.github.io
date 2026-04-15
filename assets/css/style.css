@@ -671,15 +671,11 @@ ul { list-style: none; }
 }
 
 .cs-meta-row {
-  display: flex;
-  gap: 48px;
-  align-items: flex-start;
-}
-
-.cs-meta-side {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: 40px;
+  align-items: start;
 }
 
 .cs-meta-label {
@@ -897,7 +893,14 @@ ul { list-style: none; }
 .cs-meta-val--stacked {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0;
+}
+
+.cs-meta-val--stacked span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--grey);
+  line-height: 1.7;
 }
 
 .cs-before-after {
