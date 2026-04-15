@@ -809,9 +809,9 @@ ul { list-style: none; }
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--card-border);
-  background: var(--white);
+  background: var(--tag-bg);
 }
-.cs-img-wrap img { width: 100%; display: block; background-color: #ffffff; border-radius: 16px; clip-path: inset(0 round 16px); }
+.cs-img-wrap img { width: 100%; display: block; background-color: var(--tag-bg); border-radius: 16px; clip-path: inset(0 round 16px); }
 
 /* Wrapper-free image + caption */
 .cs-img {
