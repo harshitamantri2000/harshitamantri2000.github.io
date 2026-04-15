@@ -867,6 +867,33 @@ ul { list-style: none; }
 }
 .cs-learning-text strong { color: var(--grey); font-weight: 500; }
 
+.cs-callout {
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: var(--tag-bg);
+  border: 1px solid var(--card-border);
+  border-left: 3px solid var(--teal);
+  border-radius: 10px;
+}
+
+.cs-callout p {
+  font-size: 13px;
+  color: var(--sub-text);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.cs-callout strong {
+  color: var(--grey);
+  font-weight: 500;
+}
+
+.cs-meta-val--stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .cs-before-after {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -892,7 +919,7 @@ ul { list-style: none; }
 .cs-sidenav {
   position: fixed;
   top: 50%;
-  left: calc(50% - 480px);
+  left: calc(50% - 620px);
   transform: translateY(-50%);
   z-index: 90;
   opacity: 0;
@@ -908,23 +935,21 @@ ul { list-style: none; }
 .cs-sidenav-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .cs-sidenav-link {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--tag-text);
-  padding-left: 10px;
+  padding-left: 12px;
   border-left: 2px solid transparent;
   transition: color 0.2s ease, border-color 0.2s ease;
-  white-space: nowrap;
-  max-width: 140px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 160px;
+  line-height: 1.5;
 }
 
 .cs-sidenav-link:hover {
@@ -937,7 +962,7 @@ ul { list-style: none; }
 }
 
 /* Hide on screens too narrow to have a gutter */
-@media (max-width: 1100px) {
+@media (max-width: 1320px) {
   .cs-sidenav { display: none; }
 }
 
