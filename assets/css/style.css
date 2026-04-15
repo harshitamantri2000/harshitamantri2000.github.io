@@ -128,6 +128,43 @@ ul { list-style: none; }
 }
 .intro-resume:hover { border-color: var(--grey); }
 
+/* ── Intro Actions (quick-access pills) ─────── */
+
+.intro-actions {
+  display: flex;
+  gap: 8px;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.intro-btn {
+  font-size: 13px;
+  color: var(--sub-text);
+  border: 1px solid var(--tag-border);
+  border-radius: 20px;
+  padding: 8px 16px;
+  background: transparent;
+  white-space: nowrap;
+  transition: border-color 0.25s ease, color 0.25s ease,
+              transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.intro-btn:hover {
+  border-color: var(--grey);
+  color: var(--grey);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.intro-btn:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.intro-btn-primary {
+  background: color-mix(in srgb, var(--teal) 30%, transparent);
+}
+
 .intro-name {
   font-family: var(--font-heading);
   font-size: 28px;
@@ -1235,6 +1272,7 @@ p.cs-img-caption {
 @media (max-width: 480px) {
   .page { margin: 60px auto 48px; }
   .intro { flex-direction: column; align-items: center; text-align: center; }
+  .intro-actions { justify-content: center; flex-wrap: wrap; }
   .intro-avatar { transform: rotate(-3deg); }
   .intro-tags { justify-content: center; }
   .bio { font-size: 16px; line-height: 26px; }
