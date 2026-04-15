@@ -1202,6 +1202,28 @@ p.cs-img-caption {
   .cs-before-after { grid-template-columns: 1fr; }
 }
 
+/* ── Copy Toast ───────────────────────────────── */
+.copy-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--grey);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+}
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 @media (max-width: 480px) {
   .page { margin: 60px auto 48px; }
   .intro { flex-direction: column; align-items: center; text-align: center; }

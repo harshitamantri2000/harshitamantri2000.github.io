@@ -63,6 +63,46 @@ window.addEventListener('load', () => {
   }
 });
 
+// ── Copy Email ────────────────────────────────────────
+(function () {
+  const EMAIL = 'harshitamantri3140@gmail.com';
+  const emailLinks = document.querySelectorAll('a[href="mailto:' + EMAIL + '"]');
+  if (!emailLinks.length) return;
+
+  // Create toast
+  const toast = document.createElement('div');
+  toast.className = 'copy-toast';
+  toast.textContent = 'Email copied!';
+  document.body.appendChild(toast);
+
+  let toastTimer;
+  function showToast() {
+    clearTimeout(toastTimer);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  emailLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(EMAIL).then(showToast);
+      } else {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = EMAIL;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast();
+      }
+    });
+  });
+})();
+
 // ── Case Study Side Nav ───────────────────────────────
 (function () {
   const sidenav = document.querySelector('.cs-sidenav');
@@ -78,10 +118,7 @@ window.addEventListener('load', () => {
   if (csBody) {
     const visObs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          sidenav.classList.add('cs-sidenav--visible');
-          visObs.disconnect();
-        }
+        sidenav.classList.toggle('cs-sidenav--visible', entry.isIntersecting);
       },
       { threshold: 0.05 }
     );
