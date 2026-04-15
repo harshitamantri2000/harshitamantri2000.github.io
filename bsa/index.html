@@ -22,7 +22,6 @@
       <li><a href="#s-architecture" class="cs-sidenav-link">Solution Architecture</a></li>
       <li><a href="#s-wireframes"   class="cs-sidenav-link">Wireframes</a></li>
       <li><a href="#s-decisions"    class="cs-sidenav-link">Key Design Decisions</a></li>
-      <li><a href="#s-analytics"    class="cs-sidenav-link">Analytics</a></li>
       <li><a href="#s-challenges"   class="cs-sidenav-link">Challenges</a></li>
       <li><a href="#s-impact"       class="cs-sidenav-link">Impact</a></li>
       <li><a href="#s-takeaways"    class="cs-sidenav-link">Key Takeaways</a></li>
@@ -96,7 +95,7 @@
         <div class="cs-section-label reveal">01 · Overview</div>
         <h2 class="cs-section-title reveal">What is BSA?</h2>
         <p class="cs-p reveal">
-          Underwriters and lenders spend hours manually reading through bank statements —
+          Underwriters and lenders spend <span class="hl-pink">hours manually reading through bank statements</span> —
           cross-referencing transactions in Excel, second-guessing data accuracy, and still
           making decisions on incomplete information. For smaller lenders, existing tools were
           either too expensive or too complex to adopt.
@@ -118,8 +117,8 @@
         <h2 class="cs-section-title reveal">Underwriters were flying blind.</h2>
         <p class="cs-p reveal">
           Lending decisions are high-stakes and time-sensitive. But the tools available —
-          particularly for SMEs and smaller NBFCs — were <strong>slow, expensive, or built for
-          enterprise scale</strong>. The result: assessments made from incomplete data, at high
+          particularly for SMEs and smaller NBFCs — were <span class="hl-rose"><strong>slow, expensive, or built for
+          enterprise scale</strong></span>. The result: assessments made from incomplete data, at high
           turnaround cost, with significant fraud exposure.
         </p>
 
@@ -164,7 +163,7 @@
           friction points that existing market solutions fail to address.
         </p>
         <div class="cs-img-wrap reveal">
-          <img src="../assets/images/bsa_research.png" alt="Competitive benchmarking — Perfios, FinBox, Glib analysis">
+          <img src="../assets/images/bsa_03_market_insights.png" alt="Competitive benchmarking — Perfios, FinBox, Glib analysis">
           <div class="cs-img-caption">Competitive benchmarking across Perfios, FinBox, and Glib</div>
         </div>
         <div class="cs-cards reveal">
@@ -203,11 +202,11 @@
         <div class="cs-user-list reveal">
           <div class="cs-user-item">
             <div class="cs-user-label">Underwriter / SME Lender</div>
-            <div class="cs-user-desc">Processes 10+ loan applications a day. Needs answers fast — not a tool to learn. Every extra click is friction they can't afford.</div>
+            <div class="cs-user-desc">Processes 10+ loan applications a day. Needs answers fast — not a tool to learn. <span class="hl-rose">Every extra click is friction they can't afford.</span></div>
           </div>
           <div class="cs-user-item">
             <div class="cs-user-label">Sales / Demo User</div>
-            <div class="cs-user-desc">Showcases BSA to credit heads and NBFCs evaluating vendors. Needs to explore every feature and make it look effortless. The demo is the pitch.</div>
+            <div class="cs-user-desc">Showcases BSA to credit heads and NBFCs evaluating vendors. Needs to explore every feature and make it look effortless. <span class="hl-teal">The demo is the pitch.</span></div>
           </div>
         </div>
       </div>
@@ -218,12 +217,12 @@
         <h2 class="cs-section-title reveal">Three modules, not one monolith.</h2>
         <p class="cs-p reveal">
           Rather than one unified product, we split the solution based on use case.
-          The trigger: data showed <strong>12% of users submit incorrect documents at step one</strong> —
+          The trigger: data showed <span class="hl-yellow"><strong>12% of users submit incorrect documents at step one</strong></span> —
           catching that early saves everyone time. <span class="hl-teal">A modular approach also lets clients pay only
           for what they need.</span>
         </p>
         <div class="cs-img-wrap reveal">
-          <img src="../assets/images/bsa_flow.png" alt="BSA Solution Architecture — modular flow">
+          <img src="../assets/images/bsa_flow1.png" alt="BSA Solution Architecture — modular flow">
           <div class="cs-img-caption">BSA modular architecture — three distinct use-case paths</div>
         </div>
         <div class="cs-cards cs-cards--3col reveal">
@@ -250,6 +249,9 @@
       <div class="cs-section" id="s-wireframes">
         <div class="cs-section-label reveal">06 · Wireframes</div>
         <h2 class="cs-section-title reveal">Exploring the structure.</h2>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/Wireframes.png" alt="BSA Wireframes">
+        </div>
       </div>
 
       <!-- Key Design Decisions -->
@@ -273,16 +275,20 @@
           let clients discover the full depth of the product.
         </p>
         <div class="cs-img-wrap reveal">
-          <img src="../assets/images/bsa_sales_flow.png" alt="BSA Sales Flow — all statement fetching approaches">
-          <div class="cs-img-caption">Sales Flow — all possible statement fetching approaches in one view</div>
+          <img src="../assets/images/bsa_07_sales_step.png" alt="BSA Sales — step-by-step configuration" style="clip-path: inset(36px 0 0 0)">
+          <div class="cs-img-caption">Step-by-step process with configuration options presented descriptively</div>
         </div>
         <p class="cs-p reveal">
           👉🏻 The sales team can showcase all possible approaches through which a statement can be
           fetched, and let clients explore the option that fits their needs best.
         </p>
         <div class="cs-img-wrap reveal">
-          <img src="../assets/images/bsa_sales_step.png" alt="BSA Sales — step-by-step configuration">
-          <div class="cs-img-caption">Step-by-step process with configuration options presented descriptively</div>
+          <img src="../assets/images/bsa_07_sales_showcase.png" alt="BSA Underwriter Flow — screen 1">
+          <div class="cs-img-caption">Underwriter Flow — Upload and configure</div>
+        </div>
+        <div class="cs-img-wrap reveal">
+          <img src="../assets/images/bsa_07_sales_config.png" alt="BSA Underwriter Flow — screen 2">
+          <div class="cs-img-caption">Underwriter Flow — streamlined upload experience</div>
         </div>
         <p class="cs-p reveal">
           👉🏻 A step-by-step process gives users the context of each offering — configuration options
@@ -294,28 +300,20 @@
         <p class="cs-p reveal">
           The underwriter flow strips everything non-essential. Anything that can be configured
           through the backend is handled upfront — assessment type, package selection — so
-          underwriters don't have to think about it. <strong>They just upload and go.</strong>
+          underwriters don't have to think about it. <span class="hl-teal"><strong>They just upload and go.</strong></span>
         </p>
-        <div class="cs-img-wrap reveal">
-          <img src="../assets/images/bsa_underwriter_flow.png" alt="BSA Underwriter Flow — stripped down, fast">
-          <div class="cs-img-caption">Underwriter Flow — minimal steps, backend-configured, just upload and go</div>
-        </div>
-      </div>
 
-      <!-- From Data Dump to Decision Surface -->
-      <div class="cs-section" id="s-analytics">
-        <div class="cs-section-label reveal">08 · From Data Dump to Decision Surface</div>
-        <h2 class="cs-section-title reveal">Advanced analytics was one of<br>our key differentiators.</h2>
+        <h4 class="cs-section-title reveal" style="font-size:1.1rem; margin-top:32px;">From Data Dump to Decision Surface</h4>
         <p class="cs-p reveal">
-          While competitors handed users raw Excel dumps and left them to figure it out, the goal
-          here was to build an <strong>insights dashboard that surfaces patterns</strong> — so lenders
+          Advanced analytics was one of our key differentiators. While competitors handed users raw Excel dumps and left them to figure it out, the goal
+          here was to build an <span class="hl-lavender"><strong>insights dashboard that surfaces patterns</strong></span> — so lenders
           could read a borrower's financial story without opening a single spreadsheet.
         </p>
 
-        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:36px;">Iteration 1</h3>
+        <h4 class="cs-section-title reveal" style="font-size:1.05rem; margin-top:28px;">Iteration 1</h4>
         <div class="cs-img-wrap reveal">
-          <img src="../assets/images/bsa_iteration1.png" alt="BSA Analytics — First Iteration">
-          <div class="cs-img-caption">First iteration of the analytics dashboard</div>
+          <img src="../assets/images/bsa_08_analytics_iter1_feedback.png" alt="BSA Iteration 1 — Feedback details">
+          <div class="cs-img-caption">Iteration 1 feedback — identifying what worked and what didn't</div>
         </div>
 
         <div class="cs-cards reveal">
@@ -351,15 +349,10 @@
           </div>
         </div>
 
-        <div class="cs-img-wrap reveal" style="margin-top:24px;">
-          <img src="../assets/images/bsa_iteration1_feedback.png" alt="BSA Iteration 1 — Feedback details">
-          <div class="cs-img-caption">Iteration 1 feedback — identifying what worked and what didn't</div>
-        </div>
-
-        <h3 class="cs-section-title reveal" style="font-size:1.25rem; margin-top:40px;">Final Iteration</h3>
+        <h4 class="cs-section-title reveal" style="font-size:1.05rem; margin-top:40px;">Final Iteration</h4>
         <p class="cs-p reveal">
-          The hardest part wasn't the layout — it was <strong>deciding which parameters actually
-          belonged in the overview</strong>. With so much financially relevant data, every metric felt
+          The hardest part wasn't the layout — it was <span class="hl-purple"><strong>deciding which parameters actually
+          belonged in the overview</strong></span>. With so much financially relevant data, every metric felt
           important. Too many numbers with no clear hierarchy meant lenders had no obvious place to start.
         </p>
         <p class="cs-p reveal">
@@ -367,14 +360,9 @@
           and through several iterations, we landed on a structure that puts the right parameters upfront.
         </p>
         <div class="cs-img-wrap reveal">
-          <img src="../assets/images/bsa_final_dashboard.png" alt="BSA Analytics — Final Dashboard">
+          <img src="../assets/images/bsa_08_analytics_final.png" alt="BSA Analytics — Final Dashboard">
           <div class="cs-img-caption">Final iteration — prioritised data hierarchy, single scrollable page</div>
         </div>
-        <div class="cs-img-wrap reveal">
-          <img src="../assets/images/bsa_final_wide.png" alt="BSA Analytics — Final Dashboard wide view">
-          <div class="cs-img-caption">Final dashboard — full analytics view</div>
-        </div>
-
         <div class="cs-cards reveal">
           <div class="cs-card">
             <div class="cs-card-icon">✅</div>
@@ -401,12 +389,12 @@
 
       <!-- Challenges -->
       <div class="cs-section" id="s-challenges">
-        <div class="cs-section-label reveal">09 · Challenges</div>
+        <div class="cs-section-label reveal">08 · Challenges</div>
         <h2 class="cs-section-title reveal">What made this hard.</h2>
         <div class="cs-learnings reveal">
           <div class="cs-learning">
             <div class="cs-learning-num">01</div>
-            <div class="cs-learning-text"><strong>Data prioritisation.</strong> With an overwhelming amount of financial data across the product, deciding what belonged upfront and what didn't was never straightforward. Every parameter felt critical to someone — and without a clear hierarchy, there was no obvious place to start.</div>
+            <div class="cs-learning-text"><strong>Data prioritisation.</strong> With an overwhelming amount of financial data across the product, deciding what belonged upfront and what didn't was never straightforward. <span class="hl-pink">Every parameter felt critical to someone</span> — and without a clear hierarchy, there was no obvious place to start.</div>
           </div>
           <div class="cs-learning">
             <div class="cs-learning-num">02</div>
@@ -417,7 +405,7 @@
 
       <!-- Impact -->
       <div class="cs-section" id="s-impact">
-        <div class="cs-section-label reveal">10 · Impact</div>
+        <div class="cs-section-label reveal">09 · Impact</div>
         <h2 class="cs-section-title reveal">Results that shipped.</h2>
         <div class="cs-impact reveal">
           <div class="cs-impact-item">
@@ -433,7 +421,7 @@
 
       <!-- Key Takeaways -->
       <div class="cs-section" id="s-takeaways">
-        <div class="cs-section-label reveal">11 · Key Takeaways</div>
+        <div class="cs-section-label reveal">10 · Key Takeaways</div>
         <h2 class="cs-section-title reveal">What this project taught me.</h2>
         <div class="cs-learnings reveal">
           <div class="cs-learning">
@@ -442,11 +430,11 @@
           </div>
           <div class="cs-learning">
             <div class="cs-learning-num">02</div>
-            <div class="cs-learning-text">In the absence of constant user feedback, I had to find <strong>creative ways to ensure that the product was still aligned with user needs</strong>. This taught me to be more skeptical and always open to feedback, iterating and refining the product as we went along. By staying adaptable and responsive.</div>
+            <div class="cs-learning-text">In the absence of constant user feedback, I had to find <span class="hl-lavender"><strong>creative ways to ensure that the product was still aligned with user needs</strong></span>. This taught me to be more skeptical and always open to feedback, iterating and refining the product as we went along. By staying adaptable and responsive.</div>
           </div>
           <div class="cs-learning">
             <div class="cs-learning-num">03</div>
-            <div class="cs-learning-text">I learned how to <strong>prioritise features, balance speed with quality, and make informed decisions in the face of uncertainty</strong>. Ultimately, this experience reinforced the value of continuous learning and iteration in building successful products.</div>
+            <div class="cs-learning-text">I learned how to <span class="hl-yellow"><strong>prioritise features, balance speed with quality, and make informed decisions in the face of uncertainty</strong></span>. Ultimately, this experience reinforced the value of continuous learning and iteration in building successful products.</div>
           </div>
         </div>
       </div>
@@ -455,10 +443,12 @@
   </div>
 
   <!-- Footer -->
-  <footer class="footer" style="max-width:760px; margin:0 auto; padding:20px 24px;">
-    <a href="../index.html" style="color:var(--sub-text); font-size:13px;">← Back to Portfolio</a>
-    <span style="color:var(--tag-text); font-size:13px;">Harshita Mantri · Transaction Intelligence Case Study</span>
-  </footer>
+  <div class="footer">
+    <a href="https://www.linkedin.com/in/harshita-mantri-designer/" target="_blank">LinkedIn</a>
+    <a href="mailto:harshitamantri3140@gmail.com">Email</a>
+    <a href="../docs/harshita-mantri-resume_26.pdf" target="_blank">Resume</a>
+    <a href="https://www.behance.net/harshitamantri" target="_blank">Behance</a>
+  </div>
 
   <script src="../assets/js/main.js"></script>
 </body>

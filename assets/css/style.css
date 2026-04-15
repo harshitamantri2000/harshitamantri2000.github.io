@@ -112,7 +112,21 @@ ul { list-style: none; }
   flex-direction: column;
   gap: 4px;
   padding-top: 4px;
+  flex: 1;
 }
+
+.intro-resume {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--grey);
+  border-bottom: 2px dashed var(--tag-border);
+  padding-bottom: 2px;
+  white-space: nowrap;
+  transition: border-color 0.3s;
+  align-self: flex-start;
+  margin-top: 6px;
+}
+.intro-resume:hover { border-color: var(--grey); }
 
 .intro-name {
   font-family: var(--font-heading);
@@ -556,29 +570,23 @@ ul { list-style: none; }
 }
 .contact-email:hover { border-color: var(--teal); }
 
+
 /* ── Footer ──────────────────────────────────── */
 
 .footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 24px;
   width: min(80vw, 1060px);
-  padding: 20px 0;
-  font-size: 13px;
+  margin: 0 auto;
+  padding: 28px 0;
+  font-size: 14px;
   color: var(--sub-text);
   border-top: 1px solid var(--tag-border);
 }
 
 .footer a { color: var(--sub-text); transition: color 0.3s; }
 .footer a:hover { color: var(--grey); }
-
-.footer-divider {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: #d9d9d9;
-}
 
 /* ── Scroll Reveal ───────────────────────────── */
 
@@ -1234,7 +1242,7 @@ p.cs-img-caption {
   .project-card-content { padding: 18px 20px 22px; }
   .contact-heading { font-size: 22px; }
   .journey-stop { min-width: 220px; max-width: 240px; }
-  .footer { gap: 16px; flex-wrap: wrap; }
+  .footer { gap: 24px; flex-wrap: wrap; justify-content: center; }
   .cs-cards { grid-template-columns: 1fr; }
   .cs-impact { grid-template-columns: repeat(2,1fr); }
 }
