@@ -1155,6 +1155,13 @@ p.cs-img-caption {
   line-height: 1.7;
 }
 
+.cs-insight-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
 /* Hide on screens too narrow to have a gutter */
 @media (max-width: 1320px) {
   .cs-sidenav { display: none; }
