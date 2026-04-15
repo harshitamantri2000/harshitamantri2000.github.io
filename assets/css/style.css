@@ -672,8 +672,7 @@ ul { list-style: none; }
 
 .cs-meta-row {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: start;
+  grid-template-columns: 1fr auto auto;
   gap: 40px;
   align-items: start;
 }
@@ -892,8 +891,9 @@ ul { list-style: none; }
 
 .cs-meta-val--stacked {
   display: flex;
-  flex-direction: column;
-  gap: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px 0;
 }
 
 .cs-meta-val--stacked span {
@@ -901,6 +901,12 @@ ul { list-style: none; }
   font-weight: 500;
   color: var(--grey);
   line-height: 1.7;
+}
+
+.cs-meta-val--stacked span:not(:last-child)::after {
+  content: ' · ';
+  color: var(--tag-text);
+  font-weight: 400;
 }
 
 .cs-before-after {
