@@ -265,6 +265,8 @@ ul { list-style: none; }
 .project-card-img {
   overflow: hidden;
   max-height: 320px;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 
 .project-card-img img {
@@ -797,8 +799,19 @@ ul { list-style: none; }
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--card-border);
+  background: var(--white);
 }
-.cs-img-wrap img { width: 100%; display: block; }
+.cs-img-wrap img { width: 100%; display: block; background-color: #ffffff; border-radius: 16px; clip-path: inset(0 round 16px); }
+
+/* Wrapper-free image + caption */
+.cs-img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  margin: 20px 0 8px;
+  background-color: #ffffff;
+}
 
 .cs-img-caption {
   padding: 10px 16px;
@@ -806,6 +819,17 @@ ul { list-style: none; }
   color: var(--tag-text);
   background: var(--tag-bg);
   border-top: 1px solid var(--card-border);
+}
+
+/* Caption as plain sibling (no wrapper) */
+.cs-img + .cs-img-caption,
+p.cs-img-caption {
+  margin: 0 0 28px;
+  font-size: 11px;
+  color: var(--tag-text);
+  background: transparent;
+  border-top: none;
+  padding: 6px 2px;
 }
 
 .cs-impact {
@@ -985,7 +1009,7 @@ ul { list-style: none; }
   overflow: hidden;
   border: 1px solid var(--card-border);
 }
-.cs-ba-img img { width: 100%; display: block; }
+.cs-ba-img img { width: 100%; display: block; background-color: #ffffff; border-radius: 9px; clip-path: inset(0 round 9px); }
 
 /* ── Case Study Side Nav ─────────────────────── */
 
@@ -1034,9 +1058,67 @@ ul { list-style: none; }
   border-left-color: var(--teal);
 }
 
+/* ── Step Flow ───────────────────────────────── */
+
+.cs-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.cs-flow-step {
+  flex: 1;
+  min-width: 130px;
+  background: var(--white);
+  border: 1px solid var(--tag-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cs-flow-num {
+  font-size: 11px;
+  color: var(--tag-text);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.cs-flow-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--grey);
+}
+
+.cs-flow-desc {
+  font-size: 12px;
+  color: var(--sub-text);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.cs-flow-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: var(--tag-text);
+  font-size: 16px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
 /* Hide on screens too narrow to have a gutter */
 @media (max-width: 1320px) {
   .cs-sidenav { display: none; }
+}
+
+@media (max-width: 600px) {
+  .cs-flow { flex-direction: column; }
+  .cs-flow-arrow { transform: rotate(90deg); align-self: flex-start; padding: 4px 0 4px 18px; }
 }
 
 /* ── Responsive ──────────────────────────────── */
