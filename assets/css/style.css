@@ -672,7 +672,7 @@ ul { list-style: none; }
 
 .cs-meta-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 40px;
   align-items: start;
 }
@@ -890,9 +890,9 @@ ul { list-style: none; }
 }
 
 .cs-meta-val--grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   margin-top: 2px;
 }
 
