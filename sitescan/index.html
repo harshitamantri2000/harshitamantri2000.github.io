@@ -408,74 +408,64 @@
       <!-- Usability Testing -->
       <div class="cs-section" id="s-testing">
         <div class="cs-section-label reveal">07 · Usability Testing After V2</div>
-        <h2 class="cs-section-title reveal">Testing with real users, real tasks.</h2>
+        <h2 class="cs-section-title reveal">Testing confirmed the shift we were designing for.</h2>
 
         <p class="cs-p reveal">
-          <strong>🔍 Objective:</strong> To evaluate whether the newly introduced Summary Page and
-          backend improvements (scan speed & accuracy) were actually improving the experience.
+          Tested with <strong>5–7 frequent users from Razorpay</strong> and 2–3 internal users on the
+          staging environment. Real tasks, real context — a mix of qualitative feedback and
+          behavioural observation.
         </p>
         <p class="cs-p reveal">
-          <strong>🧪 Testing Setup:</strong> Tested with <strong>5–7 frequent users from Razorpay</strong>
-          and 2–3 internal users. Users were asked to perform real-world tasks on the staging environment.
-          Collected a mix of qualitative feedback (what they said, liked, or found confusing) and
-          behavioural observations (where they struggled, hesitated, or skipped).
+          The clearest signal: agents were <span class="hl-teal">opening SiteScan first</span> instead of using it
+          to confirm what they'd already found manually. That's the habit shift the Summary Page was
+          designed to create.
         </p>
 
-        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:28px;">💡 What worked well</h3>
-        <div class="cs-cards reveal">
-          <div class="cs-card">
-            <div class="cs-card-icon">✅</div>
-            <div class="cs-card-title">Summary Page</div>
-            <div class="cs-card-desc">Helped agents quickly identify compliance issues.</div>
+        <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:28px;">What worked</h3>
+        <div class="cs-plain-list reveal">
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">01</span>
+            <span class="cs-plain-text"><strong>Summary Page</strong> — Helped agents quickly identify compliance issues before diving in.</span>
           </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">✅</div>
-            <div class="cs-card-title">Highlighted Sections in Policies</div>
-            <div class="cs-card-desc">Reduced scanning effort significantly.</div>
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">02</span>
+            <span class="cs-plain-text"><strong>Highlighted Sections in Policies</strong> — Reduced manual scanning effort significantly.</span>
           </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">✅</div>
-            <div class="cs-card-title">More Accurate MCC Codes</div>
-            <div class="cs-card-desc">Reduced manual checking — agents trusted the categorisation.</div>
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">03</span>
+            <span class="cs-plain-text"><strong>More Accurate MCC Codes</strong> — Reduced manual checking. Agents trusted the categorisation.</span>
           </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">✅</div>
-            <div class="cs-card-title">Smoother Navigation Flow</div>
-            <div class="cs-card-desc">Navigation felt smoother and more intuitive.</div>
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">04</span>
+            <span class="cs-plain-text"><strong>Smoother Navigation Flow</strong> — Navigation felt intuitive. Users moved through tasks without hesitation.</span>
           </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">✅</div>
-            <div class="cs-card-title">Individual Highlights</div>
-            <div class="cs-card-desc">Boosted confidence in overall results.</div>
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">05</span>
+            <span class="cs-plain-text"><strong>Individual Highlights</strong> — Boosted confidence in overall results.</span>
           </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">✅</div>
-            <div class="cs-card-title">Cleaner UI</div>
-            <div class="cs-card-desc">UI felt cleaner and easier on the eyes.</div>
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">06</span>
+            <span class="cs-plain-text"><strong>Cleaner UI</strong> — Agents said it felt easier on the eyes. Less visual noise meant faster decisions.</span>
           </div>
         </div>
 
         <h3 class="cs-section-title reveal" style="font-size:1.15rem; margin-top:28px;">What still needed work</h3>
-        <div class="cs-cards reveal">
-          <div class="cs-card">
-            <div class="cs-card-icon">⚠️</div>
-            <div class="cs-card-title">Icon Meanings</div>
-            <div class="cs-card-desc">Some users were still confused about what certain icons meant.</div>
+        <div class="cs-plain-list reveal">
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">01</span>
+            <span class="cs-plain-text"><strong>Icon Meanings</strong> — Some users were still confused about what certain icons meant.</span>
           </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">⚠️</div>
-            <div class="cs-card-title">Policy Page Clutter</div>
-            <div class="cs-card-desc">Policy page layout felt cluttered with too much scrolling.</div>
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">02</span>
+            <span class="cs-plain-text"><strong>Policy Page Clutter</strong> — Policy page layout felt cluttered with too much scrolling.</span>
           </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">⚠️</div>
-            <div class="cs-card-title">No Exact Location Highlighting</div>
-            <div class="cs-card-desc">In the Policy Page, issues are listed by page name but not highlighted at the exact location (line or paragraph), forcing users to manually scan and locate the problem areas.</div>
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">03</span>
+            <span class="cs-plain-text"><strong>No Exact Location Highlighting</strong> — Issues are listed by page name but not at the exact line or paragraph, forcing agents to manually locate problem areas.</span>
           </div>
-          <div class="cs-card">
-            <div class="cs-card-icon">✏️</div>
-            <div class="cs-card-title">Quick Wins Shipped</div>
-            <div class="cs-card-desc">Some minor improvements — like adding clear labels to icons — were directly pushed to production to enhance usability quickly.</div>
+          <div class="cs-plain-item">
+            <span class="cs-plain-num">04</span>
+            <span class="cs-plain-text"><strong>Quick Wins Shipped</strong> — Some minor improvements like clear icon labels were pushed directly to production.</span>
           </div>
         </div>
       </div>
