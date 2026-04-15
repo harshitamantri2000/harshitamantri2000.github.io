@@ -670,16 +670,11 @@ ul { list-style: none; }
   margin-bottom: 28px;
 }
 
-.cs-meta-block {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
 .cs-meta-row {
-  display: flex;
-  gap: 48px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  align-items: start;
 }
 
 .cs-meta-label {
@@ -894,21 +889,18 @@ ul { list-style: none; }
   font-weight: 500;
 }
 
-.cs-meta-val--pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
+.cs-meta-val--grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px 8px;
+  margin-top: 2px;
 }
 
-.cs-meta-val--pills span {
+.cs-meta-val--grid span {
   font-size: 12px;
   font-weight: 500;
   color: var(--grey);
-  background: var(--white);
-  border: 1px solid var(--tag-border);
-  border-radius: 100px;
-  padding: 3px 10px;
+  line-height: 1.8;
 }
 
 .cs-before-after {
