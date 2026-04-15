@@ -672,7 +672,7 @@ ul { list-style: none; }
 
 .cs-meta-row {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   align-items: start;
 }
