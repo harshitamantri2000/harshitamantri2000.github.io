@@ -670,11 +670,16 @@ ul { list-style: none; }
   margin-bottom: 28px;
 }
 
+.cs-meta-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .cs-meta-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  align-items: start;
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
 }
 
 .cs-meta-label {
@@ -889,24 +894,21 @@ ul { list-style: none; }
   font-weight: 500;
 }
 
-.cs-meta-val--stacked {
+.cs-meta-val--pills {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  gap: 4px 0;
+  gap: 6px;
+  margin-top: 4px;
 }
 
-.cs-meta-val--stacked span {
+.cs-meta-val--pills span {
   font-size: 12px;
   font-weight: 500;
   color: var(--grey);
-  line-height: 1.7;
-}
-
-.cs-meta-val--stacked span:not(:last-child)::after {
-  content: ' · ';
-  color: var(--tag-text);
-  font-weight: 400;
+  background: var(--white);
+  border: 1px solid var(--tag-border);
+  border-radius: 100px;
+  padding: 3px 10px;
 }
 
 .cs-before-after {
