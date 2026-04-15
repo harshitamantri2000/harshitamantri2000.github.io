@@ -672,8 +672,14 @@ ul { list-style: none; }
 
 .cs-meta-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.cs-meta-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .cs-meta-label {
