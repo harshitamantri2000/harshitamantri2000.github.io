@@ -779,6 +779,16 @@ ul { list-style: none; }
 }
 .cs-card:hover { border-color: #ddd; }
 
+.cs-card--positive {
+  background: #f6fcf8;
+  border-color: #c6dece;
+}
+
+.cs-card--negative {
+  background: #fdf6f7;
+  border-color: #f0c8cf;
+}
+
 .cs-card-icon { font-size: 1.3rem; margin-bottom: 8px; }
 
 .cs-card-title {
