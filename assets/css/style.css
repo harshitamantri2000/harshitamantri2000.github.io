@@ -1111,6 +1111,50 @@ p.cs-img-caption {
   align-self: center;
 }
 
+/* ── Insight List ────────────────────────────── */
+
+.cs-insights {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.cs-insight {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.cs-insight:first-child {
+  border-top: 1px solid var(--card-border);
+}
+
+.cs-insight-num {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--tag-border);
+  line-height: 1;
+  min-width: 44px;
+  letter-spacing: -1px;
+  flex-shrink: 0;
+}
+
+.cs-insight-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--grey);
+  margin-bottom: 4px;
+}
+
+.cs-insight-desc {
+  font-size: 13px;
+  color: var(--sub-text);
+  line-height: 1.7;
+}
+
 /* Hide on screens too narrow to have a gutter */
 @media (max-width: 1320px) {
   .cs-sidenav { display: none; }
