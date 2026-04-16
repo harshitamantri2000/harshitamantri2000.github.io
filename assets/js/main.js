@@ -49,6 +49,14 @@ document.querySelectorAll('.bento-cell[data-type="video"]').forEach(cell => {
   cell.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
 });
 
+// Inner card videos — play on hover, pause on leave
+document.querySelectorAll('.bento-inner-card').forEach(card => {
+  const video = card.querySelector('video');
+  if (!video) return;
+  card.addEventListener('mouseenter', () => video.play());
+  card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+});
+
 // ── Scroll Position Memory ────────────────────────
 // Save scroll position before leaving the page
 window.addEventListener('beforeunload', () => {

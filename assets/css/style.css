@@ -445,37 +445,40 @@ ul { list-style: none; }
 /* ── Bento Pastel Multi-Video Card ───────────── */
 
 .bento-pastel {
-  background: #f0eeff;
-  border-color: #e0d8f8;
-  padding: 16px;
+  background: #ded5ff;
+  border-color: #c9b8f5;
+  padding: 28px;
 }
 
 .bento-inner-stack {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: 20px;
+  justify-content: center;
 }
 
 .bento-inner-card {
-  flex: 1;
+  width: 200px;
+  flex-shrink: 0;
   background: var(--white);
   border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.06);
   overflow: hidden;
+  cursor: default;
 }
 
 .bento-inner-card video {
   width: 100%;
+  height: auto;
   display: block;
-  object-fit: cover;
 }
 
-.bento-inner-caption {
-  padding: 10px 14px;
-  font-size: 12px;
-  color: var(--sub-text);
-  line-height: 1.5;
-  margin: 0;
+.bento-pastel-hint {
+  margin: 16px 0 0;
+  font-size: 11px;
+  color: #9b8ec4;
+  text-align: center;
+  letter-spacing: 0.03em;
 }
 
 /* ── Breaker ─────────────────────────────────── */
