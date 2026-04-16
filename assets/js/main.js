@@ -41,13 +41,6 @@ tiltCards.forEach(card => {
   });
 });
 
-// ── Bento Video Hover ─────────────────────────────
-document.querySelectorAll('.bento-cell[data-type="video"]').forEach(cell => {
-  const video = cell.querySelector('video');
-  if (!video) return;
-  cell.addEventListener('mouseenter', () => video.play());
-  cell.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
-});
 
 
 // ── Scroll Position Memory ────────────────────────
