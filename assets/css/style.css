@@ -444,9 +444,8 @@ ul { list-style: none; }
 
 /* ── Bento Pastel Multi-Video Card ───────────── */
 
-.bento-pastel {
+.bento-pastel-body {
   background: #ded5ff;
-  border-color: #c9b8f5;
   padding: 28px;
 }
 
@@ -465,6 +464,8 @@ ul { list-style: none; }
   border: 1px solid rgba(0, 0, 0, 0.06);
   overflow: hidden;
   cursor: default;
+  display: flex;
+  flex-direction: column;
 }
 
 .bento-inner-card video {
