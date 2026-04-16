@@ -375,6 +375,109 @@ ul { list-style: none; }
 .project-card:hover .project-link { color: var(--grey); }
 .project-card:hover .project-link .arrow { transform: translateX(5px); }
 
+/* ── Also Made ───────────────────────────────── */
+
+.also-made {
+  margin-top: 80px;
+  width: var(--content-width, 60vw);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.also-made-label {
+  font-family: var(--font-hand);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--grey);
+  margin-bottom: 24px;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.bento-cell {
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: var(--white);
+  overflow: hidden;
+  cursor: default;
+  transition: box-shadow 0.3s var(--ease), transform 0.12s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-cell:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.bento-media {
+  flex: 1;
+  overflow: hidden;
+  min-height: 180px;
+}
+
+.bento-media img,
+.bento-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bento-desc {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--sub-text);
+  line-height: 1.5;
+  border-top: 1px solid var(--card-border);
+  margin: 0;
+}
+
+.bento-wide   { grid-column: span 8; }
+.bento-square { grid-column: span 4; }
+.bento-half   { grid-column: span 6; }
+.bento-tall   { grid-column: span 4; grid-row: span 2; }
+.bento-full   { grid-column: span 12; }
+
+/* ── Bento Pastel Multi-Video Card ───────────── */
+
+.bento-pastel {
+  background: #f0eeff;
+  border-color: #e0d8f8;
+  padding: 16px;
+}
+
+.bento-inner-stack {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.bento-inner-card {
+  flex: 1;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.bento-inner-card video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.bento-inner-caption {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--sub-text);
+  line-height: 1.5;
+  margin: 0;
+}
+
 /* ── Breaker ─────────────────────────────────── */
 
 .breaker {
@@ -1236,6 +1339,7 @@ p.cs-img-caption {
   .projects { width: 90vw; }
   .footer { width: 90vw; }
   .breaker { width: 80vw; font-size: 20px; line-height: 30px; }
+  .also-made { width: 90vw; }
 }
 
 @media (max-width: 767px) {
@@ -1246,6 +1350,14 @@ p.cs-img-caption {
   .about-block.reveal.visible { transform: none; }
   .journey-stop { min-width: 240px; max-width: 260px; }
   .cs-before-after { grid-template-columns: 1fr; }
+  .bento-wide, .bento-half { grid-column: span 12; }
+  .bento-square { grid-column: span 6; }
+  .bento-tall { grid-column: span 6; grid-row: span 1; }
+}
+
+@media (max-width: 480px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-wide, .bento-square, .bento-half, .bento-tall { grid-column: span 1; grid-row: span 1; }
 }
 
 /* ── Copy Toast ───────────────────────────────── */

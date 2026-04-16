@@ -18,7 +18,7 @@ if (revealEls.length) {
 }
 
 // ── 3D Card Tilt ──────────────────────────────────
-const tiltCards = document.querySelectorAll('.project-card');
+const tiltCards = document.querySelectorAll('.project-card, .bento-cell');
 tiltCards.forEach(card => {
   card.addEventListener('mouseenter', () => {
     card.style.transition = 'transform 0.12s ease, box-shadow 0.35s ease';
@@ -39,6 +39,14 @@ tiltCards.forEach(card => {
     card.style.transition = 'transform 0.45s ease, box-shadow 0.35s ease';
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
   });
+});
+
+// ── Bento Video Hover ─────────────────────────────
+document.querySelectorAll('.bento-cell[data-type="video"]').forEach(cell => {
+  const video = cell.querySelector('video');
+  if (!video) return;
+  cell.addEventListener('mouseenter', () => video.play());
+  cell.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
 });
 
 // ── Scroll Position Memory ────────────────────────
