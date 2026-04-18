@@ -1812,14 +1812,12 @@ p.cs-img-caption {
 .ai-media-card {
   border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
 }
 
 .ai-media-card img,
 .ai-media-card video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
