@@ -443,10 +443,44 @@ ul { list-style: none; }
 .bento-tall   { grid-column: span 4; grid-row: span 2; }
 .bento-full   { grid-column: span 12; }
 
+/* ── Bento Unified Color System ─────────────── */
+/*    Base: #c7d2fe (periwinkle from Rapha image)
+      Card 2: slightly warmer (violet)
+      Card 3: slightly cooler (sky blue)
+      All in one blue-violet family              */
+
+.bento-stage-orchid {
+  background: #c7d8fe;
+}
+
+.bento-stage-mint {
+  background: #c7defe;
+}
+
+/* ── Bento Row 1 — Matched Height ───────────── */
+
+.bento-grid > .bento-wide,
+.bento-grid > .bento-square {
+  min-height: 420px;
+}
+
+/* ── Bento Single Video Cell ────────────────── */
+
+.bento-video-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+.bento-video-stage .bento-inner-card {
+  width: 180px;
+}
+
 /* ── Bento Pastel Multi-Video Card ───────────── */
 
 .bento-pastel-body {
-  background: #ded5ff;
   padding: 28px;
 }
 
@@ -1725,6 +1759,9 @@ p.cs-img-caption {
 @media (max-width: 480px) {
   .bento-grid { grid-template-columns: 1fr; }
   .bento-wide, .bento-square, .bento-half, .bento-tall { grid-column: span 1; grid-row: span 1; }
+  .bento-grid > .bento-wide,
+  .bento-grid > .bento-square { min-height: auto; }
+  .bento-video-stage .bento-inner-card { width: 200px; }
 }
 
 /* ── Copy Toast ───────────────────────────────── */
