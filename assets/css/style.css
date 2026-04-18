@@ -1689,7 +1689,7 @@ p.cs-img-caption {
   .footer { width: 90vw; }
   .breaker { width: 80vw; font-size: 20px; line-height: 30px; }
   .also-made { width: 90vw; }
-.meet-designer { width: 90vw; }
+  .meet-designer { width: 90vw; }
   .meet-grid { grid-template-columns: 1fr 1fr; }
   .meet-story       { grid-column: 1 / 3; }
   .meet-photo       { grid-column: 1 / 3; }
