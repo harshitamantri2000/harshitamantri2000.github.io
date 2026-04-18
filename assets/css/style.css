@@ -537,8 +537,8 @@ ul { list-style: none; }
 
 .meet-grid {
   display: grid;
-  grid-template-columns: 35fr 25fr 40fr;
-  gap: 16px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px;
 }
 
 .meet-cell {
@@ -551,14 +551,17 @@ ul { list-style: none; }
   gap: 14px;
 }
 
-/* Grid placement — 3 col: 35fr 25fr 40fr */
-.meet-story       { grid-column: 1 / 3; }
-.meet-photo       { grid-column: 3; padding: 0; overflow: hidden; }
-.meet-work        { grid-column: 1; }
-.right-now        { grid-column: 2; }
-.fueled-by        { grid-column: 3; }
-.meet-skills      { grid-column: 1 / 3; }
-.meet-tools       { grid-column: 3; }
+/* Row 1: Story + Photo */
+.meet-story       { grid-column: span 8; grid-row: 1; }
+.meet-photo       { grid-column: span 4; grid-row: 1; padding: 0; overflow: hidden; }
+
+/* Row 2: Work + Right Now + Fueled By */
+.meet-work        { grid-column: span 4; grid-row: 2; }
+.right-now        { grid-column: span 4; grid-row: 2; }
+.fueled-by        { grid-column: span 4; grid-row: 2; }
+
+/* Row 3: Skills + Tools full width */
+.meet-skills-tools { grid-column: 1 / -1; grid-row: 3; }
 
 /* Cell label */
 .meet-cell-label {
@@ -577,18 +580,57 @@ ul { list-style: none; }
 }
 .meet-story p strong { color: var(--grey); font-weight: 600; }
 
-/* Photo cell */
-.meet-photo-label {
-  padding: 16px 18px 8px;
-  font-family: var(--font-hand);
-  font-size: 17px;
-  color: var(--sub-text);
-  flex-shrink: 0;
+.story-intro {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--grey);
+  line-height: 1.6;
 }
 
-.meet-photo .meet-carousel-inner {
-  flex: 1;
-  min-height: 260px;
+.story-beats {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.story-beats li {
+  font-size: 13px;
+  color: var(--sub-text);
+  line-height: 1.75;
+  padding: 10px 0 10px 20px;
+  border-bottom: 1px solid var(--card-border);
+  position: relative;
+}
+
+.story-beats li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.story-beats li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lavender);
+}
+
+/* Photo cell */
+.meet-photo {
+  padding: 0;
+  overflow: hidden;
+}
+
+.meet-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 /* Work list */
@@ -795,16 +837,27 @@ ul { list-style: none; }
   line-height: 1.5;
 }
 
-/* Skills */
-.meet-skills,
-.meet-tools {
+/* Skills + Tools combined card */
+.meet-skills-tools {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0;
 }
 
-/* Skills + Tools */
-.meet-skills-tools { gap: 20px; }
+.skills-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.tools-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 16px;
+}
 
 .skill-pills {
   display: flex;
@@ -1725,14 +1778,13 @@ p.cs-img-caption {
   .also-made { width: 90vw; }
   .meet-designer { width: 90vw; }
   .meet-grid { grid-template-columns: 1fr 1fr; }
-  .meet-story       { grid-column: 1 / 3; }
-  .meet-photo       { grid-column: 1 / 3; }
-  .meet-photos-strip { grid-column: 1 / 3; }
-  .meet-work        { grid-column: 1; }
-  .right-now        { grid-column: 2; }
-  .fueled-by        { grid-column: 1 / 3; }
-  .meet-skills      { grid-column: 1 / 3; }
-  .meet-tools       { grid-column: 1 / 3; }
+  .meet-story       { grid-column: 1 / -1; grid-row: auto; }
+  .meet-photo       { grid-column: 1 / -1; grid-row: auto; }
+  .meet-photos-strip { grid-column: 1 / -1; }
+  .meet-work        { grid-column: 1; grid-row: auto; }
+  .right-now        { grid-column: 2; grid-row: auto; }
+  .fueled-by        { grid-column: 1 / -1; grid-row: auto; }
+  .meet-skills-tools { grid-column: 1 / -1; grid-row: auto; }
   .life-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
@@ -1740,7 +1792,10 @@ p.cs-img-caption {
 .meet-grid { grid-template-columns: 1fr; }
   .meet-story, .meet-photo, .meet-photos-strip,
   .meet-work, .right-now, .fueled-by,
-  .meet-skills, .meet-tools { grid-column: 1; }
+  .meet-skills-tools { grid-column: 1; grid-row: auto; }
+  .meet-skills-tools { flex-direction: column; }
+  .skills-section { padding-right: 0; border-right: none; border-bottom: 1px solid var(--card-border); padding-bottom: 16px; }
+  .tools-section { padding-left: 0; padding-top: 12px; }
 }
 
 @media (max-width: 767px) {
