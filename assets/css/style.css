@@ -1888,7 +1888,8 @@ p.cs-img-caption {
   .fueled-by        { grid-column: 1 / -1; grid-row: auto; }
   .meet-skills-tools { grid-column: 1 / -1; grid-row: auto; }
   .life-grid { grid-template-columns: repeat(4, 1fr); }
-  .ai-work { width: 90vw; }
+  .ai-work { width: min(90vw, 820px); }
+  .ai-row  { gap: 32px; padding: 44px 0; }
 }
 
 @media (max-width: 767px) {
