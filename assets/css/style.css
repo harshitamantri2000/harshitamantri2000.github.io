@@ -1858,15 +1858,13 @@ p.cs-img-caption {
 
 .ai-tag {
   font-size: 12px;
-  font-weight: 500;
-  padding: 5px 14px;
+  font-weight: 400;
+  padding: 5px 12px;
   border-radius: 100px;
-  color: var(--white);
+  color: var(--sub-text);
+  border: 1px solid var(--tag-border);
+  background: transparent;
 }
-
-.ai-tag-lavender { background: var(--tag-purple); }
-.ai-tag-teal     { background: var(--tag-teal); }
-.ai-tag-pink     { background: var(--tag-pink); }
 
 /* ── Responsive ──────────────────────────────── */
 
