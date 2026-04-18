@@ -63,7 +63,7 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 64px;
 }
 
 /* ── Intro / Hero ────────────────────────────── */
@@ -72,7 +72,7 @@ ul { list-style: none; }
   display: flex;
   align-items: flex-start;
   gap: 24px;
-  margin-bottom: 48px;
+  margin-bottom: 0;
   width: min(60vw, 820px);
 }
 
@@ -221,7 +221,7 @@ ul { list-style: none; }
   flex-direction: column;
   gap: 16px;
   width: min(60vw, 820px);
-  margin-bottom: 80px;
+  margin-bottom: 0;
   text-align: left;
 }
 
@@ -289,7 +289,7 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   gap: 48px;
-  margin-bottom: 64px;
+  margin-bottom: 0;
 }
 
 .project-card {
@@ -378,8 +378,8 @@ ul { list-style: none; }
 /* ── Also Made ───────────────────────────────── */
 
 .also-made {
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 0;
+  margin-bottom: 0;
   width: var(--content-width, 60vw);
   margin-left: auto;
   margin-right: auto;
@@ -520,8 +520,8 @@ ul { list-style: none; }
 /* ── Meet the Designer ──────────────────────── */
 
 .meet-designer {
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 0;
+  margin-bottom: 0;
   width: var(--content-width, 60vw);
   margin-left: auto;
   margin-right: auto;
@@ -923,7 +923,7 @@ ul { list-style: none; }
   color: var(--sub-text);
   text-align: center;
   width: min(55vw, 760px);
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
 
 /* ── Journey Timeline ────────────────────────── */
@@ -1770,8 +1770,8 @@ p.cs-img-caption {
 /* ── How I Use AI ───────────────────────────── */
 
 .ai-work {
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 0;
+  margin-bottom: 0;
   width: min(var(--content-width, 60vw), 820px);
   margin-left: auto;
   margin-right: auto;
