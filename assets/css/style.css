@@ -1888,6 +1888,7 @@ p.cs-img-caption {
   .fueled-by        { grid-column: 1 / -1; grid-row: auto; }
   .meet-skills-tools { grid-column: 1 / -1; grid-row: auto; }
   .life-grid { grid-template-columns: repeat(4, 1fr); }
+  .ai-work { width: 90vw; }
 }
 
 @media (max-width: 767px) {
@@ -1898,6 +1899,16 @@ p.cs-img-caption {
   .meet-skills-tools { flex-direction: column; }
   .skills-section { padding-right: 0; border-right: none; border-bottom: 1px solid var(--card-border); padding-bottom: 16px; }
   .tools-section { padding-left: 0; padding-top: 12px; }
+  .ai-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 40px 0;
+  }
+  .ai-row-media,
+  .ai-row-reverse .ai-row-media { order: 1; }
+  .ai-row-text,
+  .ai-row-reverse .ai-row-text  { order: 2; }
+  .ai-row-title { font-size: 20px; }
 }
 
 @media (max-width: 767px) {
