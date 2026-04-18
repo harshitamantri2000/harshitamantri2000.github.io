@@ -1772,7 +1772,7 @@ p.cs-img-caption {
 .ai-work {
   margin-top: 80px;
   margin-bottom: 80px;
-  width: var(--content-width, 60vw);
+  width: min(var(--content-width, 60vw), 820px);
   margin-left: auto;
   margin-right: auto;
 }
