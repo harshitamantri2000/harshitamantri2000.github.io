@@ -1814,7 +1814,25 @@ p.cs-img-caption {
   overflow: hidden;
 }
 
-.ai-media-card img,
+/* Videos need mask-image for Safari border-radius clipping */
+.ai-media-card:has(video) {
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+  isolation: isolate;
+}
+
+/* Images use clip-path instead — mask-image causes 1x rasterization blur on Retina */
+.ai-media-card:has(img) {
+  clip-path: inset(0 round 16px);
+}
+
+.ai-media-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
 .ai-media-card video {
   width: 100%;
   height: auto;
