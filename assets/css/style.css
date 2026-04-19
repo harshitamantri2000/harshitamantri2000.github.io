@@ -68,6 +68,14 @@ ul { list-style: none; }
 
 /* ── Intro / Hero ────────────────────────────── */
 
+.intro-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+}
+
 .intro {
   display: flex;
   align-items: flex-start;
@@ -284,13 +292,18 @@ ul { list-style: none; }
 
 /* ── Projects ────────────────────────────────── */
 
-.projects {
+.projects-section {
   width: min(72vw, 960px);
   display: flex;
   flex-direction: column;
-  gap: 48px;
-  margin-bottom: 0;
 }
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
 
 .project-card {
   background: var(--white);
@@ -1887,6 +1900,11 @@ p.cs-img-caption {
   align-items: center;
   padding: 56px 0;
   border-top: 1px solid var(--card-border);
+}
+
+.ai-row:first-child {
+  padding-top: 0;
+  border-top: none;
 }
 
 .ai-row:last-child {
