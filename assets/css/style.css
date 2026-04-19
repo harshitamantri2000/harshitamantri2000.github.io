@@ -63,7 +63,7 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 64px;
+  gap: 100px;
 }
 
 /* ── Intro / Hero ────────────────────────────── */
@@ -385,11 +385,37 @@ ul { list-style: none; }
   margin-right: auto;
 }
 
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.section-label {
+  font-family: var(--font-hand);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--sub-text);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::before,
+.section-label::after {
+  content: '✦';
+  font-size: 14px;
+  color: var(--teal);
+  animation: spin-slow 6s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
 .also-made-label {
   font-family: var(--font-hand);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
-  color: var(--grey);
+  color: var(--sub-text);
   margin-bottom: 24px;
 }
 
@@ -529,9 +555,9 @@ ul { list-style: none; }
 
 .meet-designer-label {
   font-family: var(--font-hand);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
-  color: var(--grey);
+  color: var(--sub-text);
   margin-bottom: 24px;
 }
 
@@ -1843,9 +1869,9 @@ p.cs-img-caption {
 
 .ai-work-label {
   font-family: var(--font-hand);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
-  color: var(--grey);
+  color: var(--sub-text);
   margin-bottom: 24px;
 }
 
