@@ -555,10 +555,10 @@ ul { list-style: none; }
 .meet-story       { grid-column: span 8; grid-row: 1; }
 .meet-photo       { grid-column: span 4; grid-row: 1; padding: 0; overflow: hidden; }
 
-/* Row 2: Work + Right Now + Fueled By */
+/* Row 2: Work + IIT Bombay + Off the Clock */
 .meet-work        { grid-column: span 4; grid-row: 2; }
-.right-now        { grid-column: span 4; grid-row: 2; }
-.fueled-by        { grid-column: span 4; grid-row: 2; }
+.iitb-judge       { grid-column: span 4; grid-row: 2; }
+.off-clock        { grid-column: span 4; grid-row: 2; }
 
 /* Row 3: Skills + Tools full width */
 .meet-skills-tools { grid-column: 1 / -1; grid-row: 3; }
@@ -643,11 +643,29 @@ ul { list-style: none; }
   padding: 10px 0;
   border-bottom: 1px solid var(--card-border);
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
 }
 .work-item:first-child { padding-top: 0; }
 .work-item:last-child  { border-bottom: none; padding-bottom: 0; }
+
+.work-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  flex-shrink: 0;
+  object-fit: contain;
+  background: var(--white);
+  padding: 3px;
+}
+
+.work-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 
 .work-company { font-size: 13px; font-weight: 600; color: var(--grey); }
 .work-role    { font-size: 12px; color: var(--sub-text); }
@@ -751,42 +769,88 @@ ul { list-style: none; }
   display: block;
 }
 
-/* Right now */
-.rn-sub {
-  font-size: 11px;
-  color: var(--tag-text);
-  font-style: italic;
-  margin-top: -6px;
+/* IIT Bombay Judge */
+.iitb-photos {
+  display: flex;
+  gap: 8px;
 }
 
-.rn-list {
+.iitb-photo {
+  flex: 1;
+  min-width: 0;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.iitb-photo.portrait {
+  object-position: center 20%;
+}
+
+.iitb-photo.group {
+  object-position: center center;
+}
+
+.iitb-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.iitb-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--grey);
+}
+
+.iitb-desc {
+  font-size: 12px;
+  color: var(--sub-text);
+  line-height: 1.6;
+}
+
+/* Off the clock */
+.off-clock { grid-column: span 4; grid-row: 2; }
+
+.otc-list {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-.rn-item {
+.otc-item {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: flex-start;
+  gap: 12px;
   padding: 10px 0;
   border-bottom: 1px solid var(--card-border);
 }
 
-.rn-item:last-child { border-bottom: none; }
+.otc-item:last-child { border-bottom: none; }
 
-.rn-verb {
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 3px;
-  padding: 1px 6px;
-  align-self: flex-start;
+.otc-emoji {
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1.4;
 }
 
-.rn-text {
+.otc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.otc-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--grey);
+}
+
+.otc-desc {
   font-size: 12px;
   color: var(--sub-text);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Fueled by */
@@ -1830,7 +1894,7 @@ p.cs-img-caption {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 .ai-media-card video {
@@ -1839,9 +1903,9 @@ p.cs-img-caption {
   display: block;
 }
 
-.ai-media-lavender { background: color-mix(in srgb, var(--lavender) 55%, white); }
-.ai-media-teal     { background: color-mix(in srgb, var(--teal) 55%, white); }
-.ai-media-pink     { background: color-mix(in srgb, var(--pink) 55%, white); }
+.ai-media-lavender { background: transparent; }
+.ai-media-teal     { background: transparent; }
+.ai-media-pink     { background: transparent; }
 
 .ai-row-number {
   display: block;
