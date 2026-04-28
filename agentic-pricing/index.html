@@ -1,0 +1,3282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>PriceLab — Interactive Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ======================================
+     LoKey Design Tokens
+     ====================================== */
+  :root {
+    /* Primary */
+    --primary-500: #1766D6;
+    --primary-600: #104EB8;
+
+    /* Neutral */
+    --n-0: #FFFFFF;
+    --n-50: #FAFAFB;
+    --n-100: #ECEDED;
+    --n-200: #BFC2C4;
+    --n-400: #52575E;
+    --n-900: #131A25;
+    --n-950: #0A0D13;
+
+    /* Success */
+    --s-50: #E9FCE5;
+    --s-200: #B6F1A5;
+    --s-500: #4CAF47;
+    --s-700: #1A7A1E;
+    --s-900: #043A1A;
+
+    /* Info */
+    --i-50: #E0FCFD;
+    --i-200: #C8FAFA;
+    --i-400: #5CD4E6;
+    --i-500: #33AFCD;
+    --i-600: #007FAD;
+
+    /* Warning */
+    --w-50: #FEF2CB;
+    --w-200: #F9C963;
+    --w-600: #CB7100;
+    --w-700: #AA5800;
+
+    /* Destructive */
+    --d-200: #FCC3A1;
+    --d-500: #E23318;
+    --d-600: #C21B11;
+    --d-700: #A20C0F;
+
+    /* Layout */
+    --sidebar-w: 72px;
+    --topbar-h: 76px;
+    --subbar-h: 60px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--n-50);
+    color: var(--n-900);
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.004em;
+    overflow: hidden;
+  }
+
+  /* ======================================
+     App Shell
+     ====================================== */
+  .app {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    height: 100vh;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background: var(--n-0);
+    border-right: 1px solid var(--n-100);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+  }
+  .sidebar .logo {
+    width: 40px; height: 40px;
+    background: var(--primary-500);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--n-0);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+  .sidebar .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    padding-top: 8px;
+  }
+  .nav-btn {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--n-400);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.12s ease;
+  }
+  .nav-btn:hover { background: rgba(19, 26, 37, 0.04); color: var(--n-900); }
+  .nav-btn.active { background: rgba(23, 102, 214, 0.08); color: var(--primary-500); }
+  .nav-btn .dot {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 7px; height: 7px;
+    background: var(--d-500);
+    border-radius: 50%;
+    border: 2px solid var(--n-0);
+  }
+  .nav-btn svg { width: 20px; height: 20px; }
+  .sidebar .user-avatar {
+    width: 36px; height: 36px;
+    background: var(--primary-500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--n-0);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  /* Main */
+  .main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Top bar */
+  .topbar {
+    height: var(--topbar-h);
+    padding: 0 32px;
+    background: var(--n-0);
+    border-bottom: 1px solid var(--n-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .greeting h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    color: var(--n-900);
+    margin-bottom: 2px;
+  }
+  .greeting .date {
+    font-size: 13px;
+    color: var(--n-400);
+  }
+  .top-tabs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .top-tab-label {
+    font-size: 11px;
+    color: var(--n-400);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-right: 14px;
+    border-right: 1px solid var(--n-100);
+    margin-right: 8px;
+  }
+  .tab {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--n-900);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: all 0.12s ease;
+  }
+  .tab:hover { background: rgba(19, 26, 37, 0.04); }
+  .tab.active {
+    background: var(--primary-500);
+    color: var(--n-0);
+    font-weight: 600;
+  }
+  .tab svg { width: 14px; height: 14px; }
+
+  /* Sub bar */
+  .subbar {
+    height: var(--subbar-h);
+    padding: 0 32px;
+    background: var(--n-0);
+    border-bottom: 1px solid var(--n-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .subbar-left, .subbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subbar-label {
+    font-size: 13px;
+    color: var(--n-900);
+    margin-right: 4px;
+  }
+  .subbar-context {
+    font-size: 13px;
+    color: var(--n-900);
+    font-weight: 500;
+  }
+  .subbar-context .day {
+    color: var(--n-400);
+    font-weight: 400;
+    margin-left: 8px;
+  }
+  .chip {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid transparent;
+    transition: all 0.12s ease;
+    white-space: nowrap;
+  }
+  .chip.filled {
+    background: rgba(23, 102, 214, 0.08);
+    color: var(--primary-500);
+    border: 1px solid rgba(23, 102, 214, 0.50);
+  }
+  .chip.outline {
+    background: var(--n-0);
+    color: var(--n-900);
+    border: 1px solid var(--n-200);
+  }
+  .chip.outline:hover { background: rgba(19, 26, 37, 0.04); }
+  .chip-meta {
+    color: var(--n-400);
+    font-size: 12px;
+    margin-left: 6px;
+  }
+  .chip svg { width: 12px; height: 12px; }
+
+  /* Content area */
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px;
+  }
+  .container {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  /* ======================================
+     Building blocks
+     ====================================== */
+  .card {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .card-tight { padding: 18px 20px; }
+  .card-loose { padding: 32px 36px; }
+
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  .stack-sm { gap: 8px; }
+  .stack-lg { gap: 24px; }
+
+  .row { display: flex; align-items: center; gap: 12px; }
+  .row-between { justify-content: space-between; }
+  .row-center { justify-content: center; }
+
+  /* Buttons */
+  .btn {
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.12s ease;
+    white-space: nowrap;
+  }
+  .btn:disabled, .btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+  .btn.primary {
+    background: var(--primary-500);
+    color: var(--n-0);
+  }
+  .btn.primary:hover { background: var(--primary-600); }
+  .btn.tertiary {
+    background: var(--n-0);
+    color: var(--n-900);
+    border-color: var(--n-900);
+  }
+  .btn.tertiary:hover { background: rgba(19, 26, 37, 0.04); }
+  .btn.outlined {
+    background: var(--n-0);
+    color: var(--primary-500);
+    border-color: var(--primary-500);
+  }
+  .btn.outlined:hover { background: rgba(23, 102, 214, 0.04); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--primary-500);
+  }
+  .btn.ghost:hover { background: rgba(23, 102, 214, 0.04); }
+  .btn.destructive {
+    background: var(--n-0);
+    color: var(--d-600);
+    border-color: var(--d-200);
+  }
+  .btn.destructive:hover { background: rgba(226, 51, 24, 0.04); }
+  .btn.lg { height: 44px; padding: 0 22px; font-size: 14px; }
+  .btn.sm { height: 32px; padding: 0 12px; font-size: 12px; }
+
+  /* Type */
+  .h-display { font-size: 32px; font-weight: 700; letter-spacing: -0.016em; line-height: 1.2; }
+  .h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.012em; line-height: 1.25; }
+  .h2 { font-size: 18px; font-weight: 600; letter-spacing: -0.008em; line-height: 1.3; }
+  .h3 { font-size: 15px; font-weight: 600; line-height: 1.35; }
+  .text-lg { font-size: 16px; line-height: 1.5; }
+  .text { font-size: 14px; line-height: 1.5; }
+  .text-sm { font-size: 13px; line-height: 1.45; }
+  .text-xs { font-size: 12px; line-height: 1.4; }
+  .text-uppercase {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .muted { color: var(--n-400); }
+  .strong { color: var(--n-900); }
+  .accent { color: var(--primary-500); }
+
+  /* Status pills */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .pill.success { background: var(--s-50); color: var(--s-700); }
+  .pill.warning { background: var(--w-50); color: var(--w-700); }
+  .pill.info { background: var(--i-50); color: var(--i-600); }
+  .pill.destructive { background: rgba(226, 51, 24, 0.08); color: var(--d-600); }
+  .pill.neutral { background: var(--n-100); color: var(--n-900); }
+  .pill .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* Confidence chip — semantic color by score */
+  .conf-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border: 1px solid transparent;
+  }
+  .conf-chip strong { font-weight: 700; }
+  .conf-chip .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .conf-chip.success { background: var(--s-50); color: var(--s-700); border-color: var(--s-200); }
+  .conf-chip.warning { background: var(--w-50); color: var(--w-700); border-color: var(--w-200); }
+  .conf-chip.danger  { background: rgba(226, 51, 24, 0.08); color: var(--d-600); border-color: var(--d-200); }
+
+  /* Hero illustration card (matches IDfy reference) */
+  .hero-illustration {
+    background: rgba(23, 102, 214, 0.04);
+    border: 1px dashed rgba(23, 102, 214, 0.20);
+    border-radius: 12px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-500);
+  }
+  .hero-illustration .ill-icon {
+    width: 48px; height: 48px;
+    background: rgba(23, 102, 214, 0.10);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-icon {
+    width: 56px; height: 56px;
+    background: rgba(23, 102, 214, 0.08);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-500);
+    margin: 0 auto 18px;
+  }
+
+  /* Suggestion card */
+  .suggest-card {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .suggest-card:hover { border-color: var(--n-400); transform: translateY(-1px); }
+  .suggest-card.featured {
+    border: 1px solid rgba(23, 102, 214, 0.40);
+    background: rgba(23, 102, 214, 0.02);
+  }
+
+  /* Confidence bars */
+  .conf {
+    display: grid;
+    grid-template-columns: 220px 1fr 50px;
+    gap: 14px;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .conf .label { font-size: 13px; color: var(--n-900); }
+  .conf .label strong { font-weight: 600; }
+  .conf .track {
+    height: 8px;
+    background: var(--n-100);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .conf .fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+  .conf .fill.pick { background: var(--primary-500); }
+  .conf .fill.dissent { background: var(--w-600); }
+  .conf .pct {
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .conf .pct.pick { color: var(--primary-500); }
+  .conf .pct.dissent { color: var(--w-600); }
+
+  /* Stat tile */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .stat-grid.three { grid-template-columns: repeat(3, 1fr); }
+  .stat {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .stat .lbl { font-size: 11px; color: var(--n-400); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .stat .val { font-size: 22px; font-weight: 700; margin-top: 6px; letter-spacing: -0.008em; color: var(--n-900); }
+  .stat .val.success { color: var(--s-700); }
+  .stat .val.warning { color: var(--w-600); }
+  .stat .val.dest { color: var(--d-600); }
+  .stat .sub { font-size: 12px; color: var(--n-400); margin-top: 4px; }
+
+  /* Memo grid */
+  .memo-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+  }
+  .memo-section { margin-bottom: 18px; }
+  .memo-section:last-child { margin-bottom: 0; }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--n-400);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .ai-fill {
+    background: rgba(23, 102, 214, 0.04);
+    border: 1px solid rgba(23, 102, 214, 0.16);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--n-900);
+    line-height: 1.55;
+  }
+  .ai-fill::before {
+    content: "✦ Suggested by agent · editable";
+    display: block;
+    font-size: 10px;
+    color: var(--primary-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .field {
+    background: var(--n-50);
+    border: 1px solid var(--n-100);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--n-900);
+  }
+
+  .options { display: flex; flex-direction: column; gap: 6px; }
+  .option {
+    border: 1px solid var(--n-100);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--n-900);
+    cursor: pointer;
+    transition: all 0.12s ease;
+    background: var(--n-0);
+  }
+  .option:hover { border-color: var(--primary-500); }
+  .option.selected {
+    background: rgba(23, 102, 214, 0.08);
+    border-color: var(--primary-500);
+    color: var(--primary-500);
+    font-weight: 500;
+  }
+  .option.empty {
+    border-style: dashed;
+    color: var(--n-400);
+    background: var(--n-0);
+  }
+
+  .pill-options { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill-opt {
+    border: 1px solid var(--n-100);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--n-900);
+    cursor: pointer;
+    background: var(--n-0);
+    transition: all 0.12s ease;
+  }
+  .pill-opt:hover { border-color: var(--primary-500); }
+  .pill-opt.selected {
+    background: var(--primary-500);
+    color: var(--n-0);
+    border-color: var(--primary-500);
+    font-weight: 500;
+  }
+  .pill-opt.empty { border-style: dashed; color: var(--n-400); }
+
+  /* Two-col bull/bear */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .col {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .col.bull, .col.bear { background: var(--n-0); border-color: var(--n-100); }
+  .col-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--n-400);
+  }
+  .col-label::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--n-200);
+  }
+  .col.bull .col-label::before { background: var(--s-500); }
+  .col.bear .col-label::before { background: var(--w-600); }
+  .col h6 { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--n-900); }
+  .col p { font-size: 13px; line-height: 1.55; color: var(--n-900); }
+
+  /* Stop rule · quiet card with small accent label */
+  .stop-rule {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .stop-rule .stop-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--n-400);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .stop-rule .stop-label::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--w-600);
+  }
+  .stop-rule .stop-quote {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--n-900);
+  }
+  .stop-rule .stop-quote strong { color: var(--n-900); font-weight: 600; }
+  .stop-rule .goalpost {
+    color: var(--n-900);
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 6px;
+  }
+  .stop-rule .ack {
+    margin-top: 12px;
+    padding: 9px 13px;
+    background: var(--n-50);
+    border: 1px solid var(--n-100);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--n-900);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+  .stop-rule .ack svg { color: var(--s-500); }
+
+  /* Commit card — slide 7 plain-language wait commitment */
+  .commit-card {
+    background: var(--w-50);
+    border: 1px solid var(--w-200);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .commit-card .commit-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--n-0);
+    border: 1px solid var(--w-200);
+    color: var(--w-700);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .commit-card .commit-pill .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--w-600);
+  }
+  .commit-card .commit-rules {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .commit-card .commit-rules li {
+    display: flex; gap: 10px;
+    font-size: 13px;
+    color: var(--n-900);
+    line-height: 1.55;
+  }
+  .commit-card .commit-rules .rule-bullet {
+    flex-shrink: 0;
+    width: 22px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .commit-card .commit-rules .rule-bullet.up { color: var(--s-700); }
+  .commit-card .commit-rules .rule-bullet.down { color: var(--d-600); }
+  .commit-card .commit-rules .rule-bullet.hold { color: var(--w-700); }
+  .commit-card .commit-rules strong { font-weight: 600; color: var(--n-900); }
+  .commit-card .commit-ack {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--w-200);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .commit-card .commit-ack input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--w-600);
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    margin-top: 1px;
+    background: var(--n-0);
+    transition: all 0.15s;
+  }
+  .commit-card .commit-ack input[type="checkbox"]:checked {
+    background: var(--w-600);
+    border-color: var(--w-600);
+  }
+  .commit-card .commit-ack input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px; top: 1px;
+    width: 5px; height: 10px;
+    border: solid var(--n-0);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .commit-card .commit-ack-label {
+    font-size: 12px;
+    color: var(--n-900);
+    line-height: 1.5;
+  }
+  .commit-card .commit-ack-label strong { font-weight: 600; }
+
+  /* Watch chart — slide 8 single-signal monitor */
+  .watch-chart {
+    margin-top: 14px;
+    width: 100%;
+  }
+  .watch-chart svg { width: 100%; height: auto; display: block; }
+
+  /* Action group (decision) */
+  .action-group {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 10px;
+  }
+  .action-btn {
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    border: 1px solid transparent;
+  }
+  .action-btn .a-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .action-btn .a-meta {
+    font-size: 11px;
+    opacity: 0.75;
+  }
+  .action-btn.primary {
+    background: var(--primary-500);
+    color: var(--n-0);
+  }
+  .action-btn.primary:hover { background: var(--primary-600); }
+  .action-btn.locked {
+    background: var(--n-100);
+    color: var(--n-400);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  .action-btn.locked:hover { background: var(--n-100); }
+  .action-btn.secondary {
+    background: var(--n-0);
+    color: var(--n-900);
+    border-color: var(--n-400);
+  }
+  .action-btn.secondary:hover { background: var(--n-50); }
+  .action-btn.dest {
+    background: var(--n-0);
+    color: var(--d-600);
+    border-color: var(--d-200);
+  }
+  .action-btn.dest:hover { background: rgba(226, 51, 24, 0.04); }
+
+  /* Heads up — small inline info note */
+  .heads-up {
+    background: transparent;
+    border: none;
+    border-top: 1px dashed var(--n-100);
+    border-bottom: 1px dashed var(--n-100);
+    border-radius: 0;
+    padding: 8px 2px;
+    font-size: 12px;
+    color: var(--n-400);
+    line-height: 1.5;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .heads-up strong { color: var(--n-900); font-weight: 600; }
+  .heads-up .icon {
+    flex-shrink: 0;
+    width: 14px;
+    margin-top: 2px;
+    color: var(--w-600);
+  }
+  .heads-up.success {
+    color: var(--n-400);
+  }
+  .heads-up.success .icon { color: var(--s-500); }
+
+  /* Test row */
+  .test-list { background: var(--n-0); border: 1px solid var(--n-100); border-radius: 12px; overflow: hidden; }
+  .list-head {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--n-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .test-row {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--n-100);
+    display: grid;
+    grid-template-columns: 2fr 100px 220px 100px;
+    gap: 14px;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.12s ease;
+  }
+  .test-row:last-child { border-bottom: none; }
+  .test-row:hover { background: var(--n-50); }
+  .test-row .name { font-size: 14px; font-weight: 500; }
+  .test-row .name small { display: block; color: var(--n-400); font-size: 12px; font-weight: 400; margin-top: 2px; }
+  .test-row .day { font-size: 12px; color: var(--n-400); }
+
+  .mini-conf {
+    display: grid;
+    grid-template-columns: 1fr 36px;
+    gap: 8px;
+    align-items: center;
+  }
+  .mini-conf .track {
+    height: 5px;
+    background: var(--n-100);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .mini-conf .fill {
+    height: 100%;
+    background: var(--primary-500);
+  }
+  .mini-conf .fill.warn { background: var(--w-600); }
+  .mini-conf .pct { font-size: 12px; font-weight: 600; text-align: right; }
+
+  /* Ticker */
+  .ticker { background: var(--n-0); border: 1px solid var(--n-100); border-radius: 12px; overflow: hidden; }
+  .ticker-feed { padding: 16px 20px; }
+  .ticker-item {
+    border-left: 3px solid transparent;
+    padding: 10px 14px;
+    margin: 6px 0;
+    background: var(--n-50);
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+  }
+  .ticker-item.bear { border-left-color: var(--w-600); }
+  .ticker-item.bull { border-left-color: var(--s-500); }
+  .ticker-item.neutral { border-left-color: var(--primary-500); }
+  .ticker-item .when { font-size: 11px; color: var(--n-400); margin-bottom: 4px; }
+
+  /* Step indicator floating bottom */
+  .step-bar {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--n-950);
+    color: var(--n-0);
+    border-radius: 14px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 100;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  }
+  .step-bar .step-pill {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.72);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    background: transparent;
+    border: 1px solid transparent;
+    font-family: inherit;
+    line-height: 1;
+  }
+  .step-bar .step-pill:hover {
+    color: var(--n-0);
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.14);
+  }
+  .step-bar .step-pill:active {
+    background: rgba(255,255,255,0.16);
+  }
+  .step-bar .step-pill:disabled,
+  .step-bar .step-pill.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .step-bar .step-pill svg { flex-shrink: 0; }
+  .step-bar .step-info {
+    padding: 0 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .step-bar .step-info strong { color: var(--n-0); font-weight: 700; }
+  .step-bar .step-info .meta { display: block; font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* Help button */
+  .help-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--n-950);
+    color: var(--n-0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    z-index: 100;
+  }
+
+  /* Modal */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 13, 19, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 24px;
+  }
+  .modal {
+    background: var(--n-0);
+    border-radius: 12px;
+    width: 520px;
+    max-width: 100%;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(10, 13, 19, 0.3);
+  }
+  .modal-head {
+    padding: 22px 26px 14px;
+  }
+  .modal-head h4 { font-size: 18px; font-weight: 700; letter-spacing: -0.008em; }
+  .modal-head p { color: var(--n-400); font-size: 13px; margin-top: 6px; }
+  .modal-body { padding: 0 26px 18px; }
+  .modal-foot {
+    padding: 16px 26px;
+    border-top: 1px solid var(--n-100);
+    background: var(--n-50);
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  /* ====== LAUNCH-CONFIRM MODAL · wide variant with preview ====== */
+  .modal.modal-wide { width: 680px; }
+  .modal.modal-wide .modal-body {
+    max-height: 64vh;
+    overflow-y: auto;
+    padding-top: 6px;
+  }
+
+  .preview-card {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .preview-card .preview-head {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--n-100);
+    background: var(--n-50);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .preview-card .preview-head h5 {
+    margin: 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--primary-500);
+    font-weight: 700;
+  }
+  .preview-card .preview-head .meta {
+    font-size: 11px;
+    color: var(--n-500);
+    font-weight: 500;
+  }
+  .preview-row {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--n-100);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: start;
+  }
+  .preview-row:last-child { border-bottom: none; }
+  .preview-row .field-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--n-500);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .preview-row .field-value {
+    font-size: 13px;
+    color: var(--n-900);
+    line-height: 1.5;
+  }
+  .preview-row .edit-link {
+    font-size: 11px;
+    color: var(--primary-500);
+    background: none;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-weight: 600;
+    padding: 4px 9px;
+    border-radius: 6px;
+    align-self: start;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .preview-row .edit-link:hover {
+    background: rgba(23, 102, 214, 0.06);
+    border-color: rgba(23, 102, 214, 0.2);
+  }
+  .preview-row .edit-link::before { content: "✎ "; }
+
+  .commitment-block {
+    background: var(--w-50);
+    border: 1px solid var(--w-200);
+    border-left: 4px solid var(--w-600);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .commitment-block .c-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--w-700);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .commitment-block .c-quote {
+    color: var(--n-900);
+    font-size: 13px;
+    line-height: 1.65;
+    font-style: italic;
+  }
+  .commitment-block .c-quote strong { color: var(--n-900); font-weight: 600; font-style: normal; }
+  .commitment-block .c-quote .goalpost {
+    color: var(--w-700);
+    font-weight: 700;
+    font-style: normal;
+    display: inline-block;
+    margin-top: 4px;
+  }
+  .commitment-block .c-ack {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--w-200);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .commitment-block .c-ack input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--w-600);
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    margin-top: 1px;
+    background: var(--n-0);
+    transition: all 0.15s;
+  }
+  .commitment-block .c-ack input[type="checkbox"]:checked {
+    background: var(--w-600);
+    border-color: var(--w-600);
+  }
+  .commitment-block .c-ack input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px; top: 1px;
+    width: 5px; height: 10px;
+    border: solid var(--n-0);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .commitment-block .c-ack-label {
+    font-size: 12px;
+    color: var(--n-700);
+    line-height: 1.5;
+  }
+  .commitment-block .c-ack-label strong { color: var(--n-900); font-weight: 600; }
+
+  .btn.primary[aria-disabled="true"] {
+    background: var(--n-100);
+    color: var(--n-400);
+    cursor: not-allowed;
+    pointer-events: none;
+    border-color: var(--n-100);
+    box-shadow: none;
+  }
+
+  /* Memo / decision page */
+  .decision-card {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px;
+    padding: 28px 32px;
+  }
+  .decision-head {
+    border-bottom: 1px solid var(--n-100);
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+  }
+  .decision-head .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--w-50);
+    color: var(--w-700);
+    border: 1px solid var(--w-200);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .decision-head .tag::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--w-600);
+  }
+  .decision-head .tag.success {
+    background: var(--s-50);
+    color: var(--s-700);
+    border-color: var(--s-200);
+  }
+  .decision-head .tag.success::before { background: var(--s-500); }
+  .decision-head h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    margin-top: 12px;
+    color: var(--n-900);
+  }
+  .decision-head .mood {
+    font-size: 13px;
+    color: var(--n-400);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .decision-head .mood.success { color: var(--n-400); }
+
+  /* Replay timeline */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 90px 24px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--n-100);
+    align-items: flex-start;
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-item .when { font-size: 12px; color: var(--n-400); padding-top: 2px; font-weight: 500; }
+  .tl-item .marker {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--primary-500);
+    margin: 5px auto 0;
+    box-shadow: 0 0 0 4px rgba(23, 102, 214, 0.12);
+  }
+  .tl-item.hero .marker { background: var(--w-600); box-shadow: 0 0 0 4px rgba(203, 113, 0, 0.18); }
+  .tl-item.win .marker { background: var(--s-500); box-shadow: 0 0 0 4px rgba(76, 175, 71, 0.18); }
+  .tl-item .what strong { display: block; font-size: 13px; font-weight: 600; }
+  .tl-item .what small { display: block; color: var(--n-400); font-size: 12px; margin-top: 3px; }
+
+  /* Banner — armed stop rule (quiet) */
+  .banner-armed {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    color: var(--n-900);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .banner-armed .a-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--n-50);
+    color: var(--n-400);
+    border: 1px solid var(--n-100);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .banner-armed .a-tag::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--w-600);
+  }
+  .banner-armed h5 { font-size: 15px; font-weight: 700; margin-top: 10px; color: var(--n-900); letter-spacing: -0.005em; }
+  .banner-armed p { font-size: 13px; color: var(--n-900); margin-top: 4px; line-height: 1.55; }
+  .banner-armed strong { color: var(--n-900); font-weight: 600; }
+
+  /* Outcome */
+  .outcome-banner {
+    background: var(--s-50);
+    border: 1px solid var(--s-200);
+    border-radius: 12px;
+    padding: 22px 26px;
+  }
+  .outcome-banner .o-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--s-700);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .outcome-banner h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--n-900); }
+  .outcome-banner p { color: var(--n-900); margin-top: 6px; font-size: 14px; line-height: 1.5; }
+
+  /* Lessons */
+  .lessons {
+    background: rgba(23, 102, 214, 0.04);
+    border: 1px solid rgba(23, 102, 214, 0.16);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .lessons h5 { font-size: 13px; font-weight: 700; color: var(--primary-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .lessons ul { list-style: none; padding: 0; }
+  .lessons li {
+    font-size: 13px;
+    padding: 6px 0;
+    color: var(--n-900);
+    line-height: 1.55;
+  }
+  .lessons li::before {
+    content: "→";
+    color: var(--primary-500);
+    margin-right: 8px;
+    font-weight: 700;
+  }
+
+  /* Intake chat (test creation flow) */
+  .chat-shell {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .intake-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .chat-msg {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    max-width: 92%;
+  }
+  .chat-msg.agent { align-self: flex-start; }
+  .chat-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg-avatar {
+    width: 32px; height: 32px;
+    background: rgba(23, 102, 214, 0.10);
+    color: var(--primary-500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .msg-bubble {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 12px 14px 14px 4px;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--n-900);
+  }
+  .chat-msg.user .msg-bubble {
+    background: var(--primary-500);
+    color: var(--n-0);
+    border-color: var(--primary-500);
+    border-radius: 14px 12px 4px 14px;
+  }
+  .msg-bubble p { margin: 0 0 8px; }
+  .msg-bubble p:last-child { margin-bottom: 0; }
+  .msg-bubble strong { font-weight: 700; }
+  .msg-bubble .small {
+    display: block;
+    font-size: 12px;
+    color: var(--n-400);
+    margin: 4px 0 8px;
+  }
+  .msg-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .msg-chip {
+    border: 1px solid var(--n-100);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 12px;
+    color: var(--n-900);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    background: var(--n-0);
+    font-weight: 500;
+    user-select: none;
+  }
+  .msg-chip:hover { border-color: var(--primary-500); color: var(--primary-500); }
+  .msg-chip.selected {
+    background: rgba(23, 102, 214, 0.08);
+    border-color: var(--primary-500);
+    color: var(--primary-500);
+  }
+  .msg-chip.primary {
+    background: var(--primary-500);
+    color: var(--n-0);
+    border-color: var(--primary-500);
+    font-weight: 600;
+  }
+  .msg-chip.primary:hover {
+    background: var(--primary-600);
+    border-color: var(--primary-600);
+    color: var(--n-0);
+  }
+  .memo-snippet {
+    background: var(--n-50);
+    border: 1px solid var(--n-100);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 8px 0;
+  }
+  .memo-snippet .ms-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--primary-500);
+    margin-bottom: 4px;
+  }
+  .memo-snippet .ms-body {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--n-900);
+  }
+  .memo-snippet .ms-body strong { font-weight: 700; color: var(--n-900); }
+  .intake-summary {
+    background: var(--n-50);
+    border: 1px solid var(--n-100);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .intake-summary .row {
+    font-size: 13px;
+    color: var(--n-900);
+    display: block;
+  }
+  .intake-summary .row strong { color: var(--n-900); font-weight: 700; }
+  .chat-input-row {
+    margin-top: 14px;
+    background: var(--n-0);
+    border: 1px solid var(--n-200);
+    border-radius: 12px;
+    padding: 6px 6px 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .chat-input-row .input-field {
+    flex: 1;
+    font-size: 13px;
+    color: var(--n-900);
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    font-family: inherit;
+  }
+  .chat-input-row .input-field::placeholder { color: var(--n-400); }
+  .msg-chip.locked { opacity: 0.45; pointer-events: none; }
+  .msg-chip.locked.selected { opacity: 1; }
+  .chat-input-row .send-btn {
+    background: var(--primary-500);
+    color: var(--n-0);
+    border: none;
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .chat-input-row .send-btn:hover { background: var(--primary-600); }
+  .awaiting {
+    font-size: 12px;
+    color: var(--n-400);
+    font-style: italic;
+    text-align: center;
+    padding: 6px 0;
+  }
+
+  /* Hypothesis cards (3 directions after intake) */
+  .intake-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .hyp-card {
+    background: rgba(23, 102, 214, 0.04);
+    border: 1px solid rgba(23, 102, 214, 0.16);
+    border-radius: 12px;
+    padding: 18px 22px;
+    position: relative;
+  }
+  .hyp-card.best-fit {
+    border: 2px solid var(--w-600);
+    padding: 17px 21px;
+  }
+  .hyp-tag {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--n-0);
+  }
+  .hyp-tag.best-fit, .hyp-tag.backup { background: var(--primary-600); }
+  .hyp-tag.conditional { background: var(--w-700); }
+  .hyp-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--n-900);
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
+  }
+  .hyp-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--n-900);
+    margin-bottom: 12px;
+  }
+  .hyp-desc strong { font-weight: 700; }
+  .hyp-meta {
+    font-size: 12px;
+    color: var(--primary-600);
+    line-height: 1.5;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(23, 102, 214, 0.20);
+    margin-bottom: 12px;
+  }
+  .hyp-meta .icon { margin-right: 4px; }
+  .hyp-meta .badge-rec { font-weight: 600; }
+  .hyp-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .hyp-btn {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--n-200);
+    background: var(--n-0);
+    color: var(--n-900);
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.12s ease;
+  }
+  .hyp-btn:hover { background: var(--n-50); }
+  .hyp-btn.discuss {
+    background: var(--w-50);
+    border-color: var(--w-200);
+    color: var(--w-700);
+  }
+  .hyp-btn.discuss:hover { background: rgba(249, 201, 99, 0.30); }
+  .hyp-btn.primary {
+    background: var(--primary-500);
+    color: var(--n-0);
+    border-color: var(--primary-500);
+  }
+  .hyp-btn.primary:hover {
+    background: var(--primary-600);
+    border-color: var(--primary-600);
+  }
+  .hyp-btn.remove {
+    color: var(--d-600);
+    border-color: rgba(226, 51, 24, 0.20);
+  }
+  .hyp-btn.remove:hover { background: rgba(226, 51, 24, 0.04); }
+  .hyp-callout {
+    background: var(--w-50);
+    border: 1px dashed var(--w-200);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--n-900);
+    line-height: 1.55;
+    margin-top: 4px;
+  }
+  .hyp-callout strong { color: var(--n-900); font-weight: 700; }
+  .hyp-callout .hyp-btn {
+    margin-left: 4px;
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  .hyp-different {
+    background: var(--n-0);
+    border: 1px dashed var(--n-200);
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--n-900);
+    line-height: 1.55;
+    margin-top: 4px;
+  }
+  .hyp-different strong { font-weight: 700; }
+
+  /* Chat side panel */
+  .chat-panel {
+    position: fixed;
+    top: 0; right: 0;
+    width: 420px;
+    height: 100vh;
+    background: var(--n-0);
+    border-left: 1px solid var(--n-100);
+    box-shadow: -8px 0 32px rgba(10, 13, 19, 0.10);
+    display: flex;
+    flex-direction: column;
+    z-index: 150;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+  }
+  .chat-panel.open { transform: translateX(0); }
+  .chat-head {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--n-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .chat-head h5 { font-size: 15px; font-weight: 600; }
+  .chat-context {
+    padding: 10px 22px;
+    background: var(--n-50);
+    border-bottom: 1px solid var(--n-100);
+    font-size: 12px;
+    color: var(--n-400);
+  }
+  .chat-feed {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .chat-msg {
+    border-radius: 14px 14px 14px 2px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    max-width: 85%;
+    background: var(--n-50);
+    color: var(--n-900);
+    align-self: flex-start;
+  }
+  .chat-msg.me {
+    border-radius: 14px 14px 2px 14px;
+    background: var(--primary-500);
+    color: var(--n-0);
+    align-self: flex-end;
+  }
+  .chat-msg .receipt {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: var(--n-0);
+    border: 1px dashed var(--n-200);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--n-400);
+  }
+  .chat-input {
+    padding: 14px 22px;
+    border-top: 1px solid var(--n-100);
+    background: var(--n-50);
+  }
+  .chat-input .input {
+    background: var(--n-0);
+    border: 1px solid var(--n-200);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--n-400);
+  }
+
+  /* Highlight pulse */
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(23, 102, 214, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(23, 102, 214, 0); }
+  }
+  .pulse { animation: pulse 1.6s ease-in-out infinite; }
+
+  /* Hidden helper */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.2s ease; }
+
+  /* ====== DRAFTING LAYOUT — chat + agent insights side panel ====== */
+  .drafting-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 24px;
+    align-items: start;
+  }
+  .agent-insights {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 16px;
+    padding: 24px 22px 20px;
+    position: sticky;
+    top: 16px;
+    box-shadow: 0 1px 2px rgba(19,26,37,0.03);
+  }
+
+  .insights-head { margin-bottom: 22px; }
+  .live-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--s-50);
+    color: var(--s-700);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .live-tag .blob {
+    width: 6px; height: 6px;
+    background: var(--s-500);
+    border-radius: 50%;
+    animation: blob 1.6s ease-in-out infinite;
+  }
+  @keyframes blob {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
+  .insights-head h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--n-900);
+    letter-spacing: -0.01em;
+  }
+  .insights-head p {
+    font-size: 12px;
+    color: var(--n-500);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* The hero impact block */
+  .impact-hero {
+    background: linear-gradient(180deg, var(--s-50) 0%, var(--n-0) 100%);
+    border: 1px solid var(--s-200);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+  }
+  .impact-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--s-700);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .impact-number {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--s-700);
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .impact-sub {
+    font-size: 12px;
+    color: var(--n-700);
+    margin-bottom: 14px;
+  }
+  .impact-range {
+    font-size: 11px;
+    color: var(--n-500);
+    padding-top: 14px;
+    border-top: 1px solid rgba(26, 122, 30, 0.16);
+    margin-bottom: 12px;
+  }
+  .impact-range strong { color: var(--n-900); font-weight: 600; }
+
+  .confidence-inline {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+  }
+  .confidence-inline .conf-label {
+    font-size: 11px;
+    color: var(--n-700);
+    font-weight: 600;
+  }
+  .confidence-inline .conf-track {
+    background: rgba(23, 102, 214, 0.14);
+    height: 5px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .confidence-inline .conf-fill {
+    height: 100%;
+    background: var(--primary-500);
+    border-radius: 3px;
+  }
+  .confidence-inline .conf-pct {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-500);
+  }
+
+  /* Small text blocks */
+  .insight-block {
+    margin-bottom: 16px;
+  }
+  .insight-block .lbl {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--n-500);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .insight-block .body {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--n-700);
+  }
+  .insight-block .body strong { color: var(--n-900); font-weight: 600; }
+
+  .risk-block {
+    background: var(--d-50);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1px solid rgba(252, 195, 161, 0.5);
+  }
+  .risk-block .lbl { color: var(--d-700); margin-bottom: 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; }
+  .risk-block .body { color: var(--d-700); font-size: 12px; line-height: 1.5; }
+  .risk-block .body strong { color: var(--n-900); font-weight: 600; }
+
+  .insights-foot {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--n-100);
+  }
+  .insights-foot button {
+    background: var(--n-0);
+    border: 1px solid var(--n-100);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: var(--n-700);
+    cursor: pointer;
+    width: 100%;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .insights-foot button:hover {
+    background: var(--n-50);
+    border-color: var(--n-400);
+    color: var(--n-900);
+  }
+
+  @media (max-width: 1100px) {
+    .drafting-layout { grid-template-columns: 1fr; }
+    .agent-insights { position: relative; top: 0; }
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="logo">P</div>
+    <div class="nav">
+      <div class="nav-btn active" title="Home">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12L12 4l9 8M5 10v10h14V10"/></svg>
+      </div>
+      <div class="nav-btn" title="Notifications">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14V11a6 6 0 1 0-12 0v3a2 2 0 0 1-.6 1.4L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/></svg>
+        <div class="dot"></div>
+      </div>
+      <div class="nav-btn" title="Activity">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+      </div>
+    </div>
+    <div class="user-avatar" title="Priya">P</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="greeting">
+        <h1 id="greet-h1">Good afternoon, Priya 👋</h1>
+        <div class="date" id="greet-date">Tuesday 28 April, 2026</div>
+      </div>
+    </div>
+
+    <!-- Sub bar -->
+    <div class="subbar">
+      <div class="subbar-left">
+        <span class="subbar-context" id="ctx-stage">Test hub</span>
+      </div>
+      <div class="subbar-right">
+        <button class="chip outline" id="ask-agent">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 0 1-13.4 7.84L3 21l1.16-4.6A9 9 0 1 1 21 12z"/></svg>
+          Ask the agent
+        </button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- ============ SCREEN 1: COLD START · WELCOME ============ -->
+      <div class="screen active" id="s1">
+        <div class="container">
+          <div style="max-width: 720px; margin: 40px auto 0; text-align: center;">
+            <div class="text-xs muted" style="letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px;">★ Day zero · welcome</div>
+            <h2 class="h1" style="font-size: 30px; margin-bottom: 12px; letter-spacing: -0.02em;">I'm starting from zero on you.</h2>
+            <p class="text muted" style="max-width: 540px; margin: 0 auto 24px;">I don't have a scorecard yet because I haven't made any predictions for your team. Until I do, treat my advice as soft. My calibration will sharpen with every test we run together.</p>
+
+            <div class="stat-grid" style="margin-bottom: 22px;">
+              <div class="stat" style="border-style: dashed; border-color: var(--n-400);">
+                <div class="lbl">Calls held at 90 days</div>
+                <div class="val muted">0 / 0</div>
+                <div class="sub">No history yet</div>
+              </div>
+              <div class="stat" style="border-style: dashed; border-color: var(--n-400);">
+                <div class="lbl">Counter-args validated</div>
+                <div class="val muted">0</div>
+                <div class="sub">Need ~6 tests</div>
+              </div>
+              <div class="stat" style="border-style: dashed; border-color: var(--n-400);">
+                <div class="lbl">Calibration tier</div>
+                <div class="val muted">—</div>
+                <div class="sub">Earned, not claimed</div>
+              </div>
+            </div>
+
+            <div style="background: var(--i-50); border: 1px solid var(--i-200); border-radius: 12px; padding: 16px 20px; text-align: left; margin-bottom: 22px; font-size: 13px; color: var(--i-600);">
+              <strong style="display: block; margin-bottom: 4px; color: var(--n-900);">What I CAN offer right now</strong>
+              I have anonymised priors from ~140 streaming-pricing tests across the industry. I'll use them as a starting point — but I'll <em>label every recommendation</em> as "borrowed prior" or "your own data." After ~10 tests of yours, I'll switch to your own track record by default.
+            </div>
+
+            <button class="btn primary pulse" style="font-size: 14px; padding: 12px 24px;" onclick="goToScreen(2)">Start your first test →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 3: TEST HUB / CONTEXTUALISED SUGGESTIONS ============ -->
+      <div class="screen" id="s2">
+        <div class="container">
+          <div class="row row-between" style="margin-bottom: 16px;">
+            <div>
+              <h2 class="h1">Based on what you told me</h2>
+              <p class="text muted" style="margin-top: 4px;">Three tests I'd suggest. Each one is anchored to the constraints you gave.</p>
+            </div>
+            <button class="btn tertiary" onclick="goToScreen(2)">+ New from scratch</button>
+          </div>
+
+          <div style="background: var(--w-50); border: 1px solid var(--w-200); border-radius: 10px; padding: 12px 16px; margin-bottom: 22px; font-size: 13px; color: var(--w-700); display: flex; align-items: center; gap: 10px;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            <div><strong style="color: var(--n-900);">Working on:</strong> grow Standard plan revenue without losing customers · <strong>Risk:</strong> conservative · <strong>Constraints:</strong> Hotstar's ₹229, Q2 board meeting in 6 weeks. <span style="text-decoration: underline; cursor: pointer;">Edit context</span></div>
+          </div>
+
+          <div class="stat-grid" style="margin-bottom: 24px;">
+            <div class="stat">
+              <div class="lbl">Tests running</div>
+              <div class="val">0</div>
+              <div class="sub">No tests yet</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">90-day hit rate</div>
+              <div class="val muted">—</div>
+              <div class="sub">Need ~10 tests</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Counter-arg accuracy</div>
+              <div class="val muted">—</div>
+              <div class="sub">Need ~6 tests</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Last outcome</div>
+              <div class="val muted">—</div>
+              <div class="sub">No history yet</div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 12px;">
+            <div class="row row-between">
+              <h3 class="h2">3 tests I'd suggest</h3>
+              <span class="text-xs muted">Ranked by fit to your goal</span>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="suggest-card featured" onclick="goToScreen(4)">
+              <div class="row row-between" style="margin-bottom: 10px;">
+                <span class="pill info"><span class="dot"></span> Best fit</span>
+                <span class="conf-chip success"><span class="dot"></span>My confidence <strong>71%</strong></span>
+              </div>
+              <h3 class="h2" style="margin-bottom: 6px;">Standard plan · ₹199 → ₹249</h3>
+              <p class="text-sm" style="margin-bottom: 10px;">Directly answers your goal. Standard tier audience indexes 1.3× on premium catalogue — they're choosing for content, not price. A modest increase lifts revenue with limited sign-up risk. <strong>Stays below Hotstar's ₹229 threshold for tier-2.</strong></p>
+              <div class="row" style="font-size: 12px; color: var(--n-400); flex-wrap: wrap; gap: 8px;">
+                <span>12 comparable tests · borrowed priors</span>
+                <span>·</span>
+                <span>~28 day runtime</span>
+                <span>·</span>
+                <span class="accent" style="font-weight: 600;">✦ Recommended first test</span>
+              </div>
+            </div>
+
+            <div class="suggest-card">
+              <div class="row row-between" style="margin-bottom: 10px;">
+                <span class="pill neutral">Backup</span>
+                <span class="conf-chip warning"><span class="dot"></span>My confidence <strong>54%</strong></span>
+              </div>
+              <h3 class="h2" style="margin-bottom: 6px;">Annual plan discount · 10% → 15%</h3>
+              <p class="text-sm" style="margin-bottom: 10px;">Conservative-friendly — discounting feels "safer" than a price increase if you want to hedge. Could shift behaviour to longer commitments and reduce month-11 cancellation cluster.</p>
+              <div class="row" style="font-size: 12px; color: var(--n-400);">
+                <span>8 comparable tests</span>
+                <span>·</span>
+                <span>~35 day runtime</span>
+              </div>
+            </div>
+
+            <div class="suggest-card">
+              <div class="row row-between" style="margin-bottom: 10px;">
+                <span class="pill warning">Conditional</span>
+                <span class="conf-chip danger"><span class="dot"></span>My confidence <strong>48%</strong></span>
+              </div>
+              <h3 class="h2" style="margin-bottom: 6px;">Tier-2 cities · localised ₹179</h3>
+              <p class="text-sm" style="margin-bottom: 10px;">Defends against Hotstar in markets where you said you can't price above them. Riskier because it segments your audience. <strong>I'd not recommend this as your first test</strong> — but worth queueing for after.</p>
+              <div class="row" style="font-size: 12px; color: var(--n-400);">
+                <span>5 comparable tests</span>
+                <span>·</span>
+                <span>~21 day runtime</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 14px; padding: 12px 16px; background: var(--n-50); border-radius: 8px; border: 1px dashed var(--n-200); font-size: 12px; color: var(--n-500);">
+            <strong style="color: var(--n-900);">What I almost suggested but didn't:</strong> Mobile-only ₹79 tier. You said conservative — that one would be a bigger bet on a new segment with high cannibalisation risk. Saving it for later if you change appetite. <span style="color: var(--w-700); font-weight: 600;">Want me to add it back?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 3: INTAKE CHAT ============ -->
+      <div class="screen" id="s3">
+        <div class="container">
+          <div style="margin-bottom: 24px;">
+            <div class="text-xs muted">New test · planning conversation</div>
+            <h2 class="h1" style="margin-top: 4px;">Tell me what you're working on</h2>
+            <p class="text muted" style="margin-top: 4px;">Before suggesting tests, the agent learns about your business, constraints, and risk appetite.</p>
+          </div>
+
+          <div class="chat-shell">
+            <div class="intake-chat" id="intakeFeed"></div>
+            <div class="chat-input-row" id="intakeInputRow" style="display:none;">
+              <input class="input-field" id="intakeInput" type="text" placeholder="Type your answer…" />
+              <button class="send-btn" onclick="submitIntakeText()">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 4: DRAFTING CHAT ============ -->
+      <div class="screen" id="s4">
+        <div class="container">
+          <div class="row row-between" style="margin-bottom: 24px;">
+            <div>
+              <div class="text-xs muted">Drafting the test together</div>
+              <h2 class="h1" style="margin-top: 4px;">Standard plan · ₹199 → ₹249</h2>
+              <p class="text muted" style="margin-top: 4px;">The agent walks through each piece — Hypothesis → Metric → Bull/Bear → Stop rule → Pre-mortem.</p>
+            </div>
+            <button class="btn ghost">Save draft</button>
+          </div>
+
+          <div class="drafting-layout">
+          <div class="chat-shell"><div class="intake-chat">
+
+            <div class="chat-msg agent">
+              <div class="msg-avatar">✦</div>
+              <div class="msg-bubble">
+                <p>Based on what we discussed, here's a hypothesis I've drafted:</p>
+                <div class="memo-snippet">
+                  <div class="ms-label">Hypothesis</div>
+                  <div class="ms-body">Raising the Standard plan from ₹199 to ₹249 will increase total revenue, because customers in this tier are choosing for catalogue, not price.</div>
+                </div>
+                <p>Want to tweak it, or are we good?</p>
+                <div class="msg-chips">
+                  <span class="msg-chip selected">Looks good ✓</span>
+                  <span class="msg-chip">Tweak the wording</span>
+                  <span class="msg-chip">Why this hypothesis?</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-msg user">
+              <div class="msg-bubble">Looks good. Standard tier really is catalogue-driven for us.</div>
+            </div>
+
+            <div class="chat-msg agent">
+              <div class="msg-avatar">✦</div>
+              <div class="msg-bubble">
+                <p>Now — <strong>what does "better" mean for this test?</strong> This is your call, not mine.</p>
+                <span class="small">You said you'd defend this to the board in 6 weeks. I'd recommend <strong>"Total revenue at 90 days"</strong> — most CFO-defensible. But pick what matches your strategy.</span>
+                <div class="msg-chips">
+                  <span class="msg-chip">More sign-ups</span>
+                  <span class="msg-chip">Revenue per customer</span>
+                  <span class="msg-chip selected">Total revenue at 90 days · recommended ✓</span>
+                  <span class="msg-chip">Customers staying past 90 days</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-msg user">
+              <div class="msg-bubble">Total revenue at 90 days. Most defensible to the board.</div>
+            </div>
+
+            <div class="chat-msg agent">
+              <div class="msg-avatar">✦</div>
+              <div class="msg-bubble">
+                <p>Good. I've drafted both sides — read them and push back if you disagree:</p>
+                <div class="memo-snippet">
+                  <div class="ms-label" style="color: var(--s-700);">Bull case · why this will work</div>
+                  <div class="ms-body">Standard tier audience indexes 1.3× on premium catalogue. Last two price increases saw conversion drop &lt;3%, revenue per signup grew 18–22%.</div>
+                </div>
+                <div class="memo-snippet">
+                  <div class="ms-label" style="color: var(--d-600);">Bear case · why this might fail</div>
+                  <div class="ms-body">Sign-ups may hold but watch time could drop, signaling that a higher-price audience expects more from the catalogue and will churn at month 3.</div>
+                </div>
+                <p>Both honest?</p>
+                <div class="msg-chips">
+                  <span class="msg-chip selected">Both look right ✓</span>
+                  <span class="msg-chip">Bull is too optimistic</span>
+                  <span class="msg-chip">Add to bear case</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-msg user">
+              <div class="msg-bubble">Both look right.</div>
+            </div>
+
+            <div class="chat-msg agent">
+              <div class="msg-avatar">✦</div>
+              <div class="msg-bubble">
+                <p>Last thing — and this is the most important. <strong>What's our stop rule?</strong> The line that, if crossed, we kill the test no matter what.</p>
+                <span class="small">Pick the one you'll actually honour. <strong>I won't move this goalpost later.</strong></span>
+                <div class="msg-chips" style="flex-direction: column; align-items: flex-start;">
+                  <span class="msg-chip selected">Watch time on returning customers drops by day 24 · recommended ✓</span>
+                  <span class="msg-chip">90-day retention drops more than 4%</span>
+                  <span class="msg-chip">New sign-ups drop more than 8% in week 1</span>
+                  <span class="msg-chip">Write my own</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-msg user">
+              <div class="msg-bubble">Watch time on returning customers. Cleanest signal.</div>
+            </div>
+
+            <div class="chat-msg agent">
+              <div class="msg-avatar">✦</div>
+              <div class="msg-bubble">
+                <p>Locked. Before we launch, read the pre-mortem — three ways this could embarrass you in 8 weeks:</p>
+                <div class="memo-snippet">
+                  <div class="ms-label" style="color: var(--w-700);">Pre-mortem · 3 risks</div>
+                  <div class="ms-body">
+                    <strong>1.</strong> Sign-ups hold but watch time drops → real revenue drag at day 90<br/>
+                    <strong>2.</strong> Winning cohort is metro tier-1 only → extrapolates badly to tier-2/3<br/>
+                    <strong>3.</strong> Hotstar launches a ₹229 tier mid-test and contaminates the signal
+                  </div>
+                </div>
+                <p>Acknowledge these and we go live.</p>
+                <div class="msg-chips">
+                  <span class="msg-chip primary pulse" onclick="goToScreen(5)">✓ Acknowledged · Launch test</span>
+                  <span class="msg-chip">Discuss the risks first</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-input-row">
+              <div class="input-field">Type to ask a follow-up before launching…</div>
+              <button class="send-btn">Send</button>
+            </div>
+
+          </div></div>
+
+          <!-- AGENT INSIGHTS · right side panel -->
+          <aside class="agent-insights">
+            <div class="insights-head">
+              <span class="live-tag"><span class="blob"></span> Live · my read</span>
+              <h3>What I'm thinking</h3>
+              <p>Live reasoning behind this draft.</p>
+            </div>
+
+            <!-- Hero impact -->
+            <div class="impact-hero">
+              <div class="impact-label">Predicted impact</div>
+              <div class="impact-number">+₹3.6L</div>
+              <div class="impact-sub">net revenue lift over 90 days</div>
+              <div class="impact-range">Range: <strong>₹2.4L – ₹4.8L</strong></div>
+              <div class="confidence-inline">
+                <span class="conf-label">My confidence</span>
+                <div class="conf-track"><div class="conf-fill" style="width: 71%;"></div></div>
+                <span class="conf-pct">71%</span>
+              </div>
+            </div>
+
+            <!-- Why this number -->
+            <div class="insight-block">
+              <div class="lbl">Why this number</div>
+              <div class="body">Based on <strong>12 comparable past tests</strong> on price-band &amp; audience cohort. My band held in <strong>9 of 12</strong>. Median realised lift was <strong>+3.6%</strong>.</div>
+            </div>
+
+            <!-- If I'm wrong -->
+            <div class="risk-block">
+              <div class="lbl">If I'm wrong</div>
+              <div class="body">Worst case <strong>−2.1%</strong> revenue. Recoverable in 14 days.</div>
+            </div>
+
+            <div class="insights-foot">
+              <button onclick="toggleChat()">💬 Discuss any of this</button>
+            </div>
+          </aside>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 5: CONFIRM MODAL ============ -->
+      <div class="screen" id="s5">
+        <div class="container" style="opacity: 0.4; pointer-events: none;">
+          <div class="row row-between" style="margin-bottom: 20px;">
+            <div>
+              <div class="text-xs muted">Draft · confirming</div>
+              <h2 class="h1" style="margin-top: 4px;">Standard plan · ₹199 → ₹249</h2>
+            </div>
+          </div>
+          <div class="card" style="height: 200px;"></div>
+        </div>
+        <div class="modal-bg">
+          <div class="modal modal-wide">
+            <div class="modal-head">
+              <h4>One more thing before we launch</h4>
+              <p>Quick review of what you're committing to. Edit anything below — or check the box and go live.</p>
+            </div>
+            <div class="modal-body">
+
+              <!-- Preview card -->
+              <div class="preview-card">
+                <div class="preview-head">
+                  <h5>★ Test draft · preview</h5>
+                  <span class="meta">Auto-saved 14:32 IST</span>
+                </div>
+                <div class="preview-row">
+                  <div>
+                    <div class="field-label">Hypothesis</div>
+                    <div class="field-value">Raising the Standard plan from ₹199 to ₹249 will increase total revenue, because customers in this tier are choosing for catalogue, not price.</div>
+                  </div>
+                  <button class="edit-link" onclick="goToScreen(4)">Edit</button>
+                </div>
+                <div class="preview-row">
+                  <div>
+                    <div class="field-label">Success metric</div>
+                    <div class="field-value">Total revenue at 90 days</div>
+                  </div>
+                  <button class="edit-link" onclick="goToScreen(4)">Edit</button>
+                </div>
+                <div class="preview-row">
+                  <div>
+                    <div class="field-label">Stop-rule signal</div>
+                    <div class="field-value">Watch time on returning customers — checked daily, decision on Day 24</div>
+                  </div>
+                  <button class="edit-link" onclick="goToScreen(4)">Edit</button>
+                </div>
+                <div class="preview-row">
+                  <div>
+                    <div class="field-label">Test plan</div>
+                    <div class="field-value">28 days runtime · ~40k users · 50/50 traffic split</div>
+                  </div>
+                  <button class="edit-link" onclick="goToScreen(4)">Edit</button>
+                </div>
+                <div class="preview-row">
+                  <div>
+                    <div class="field-label">Risk budget</div>
+                    <div class="field-value">~₹4.2L deferred revenue · 28-day runtime</div>
+                  </div>
+                  <button class="edit-link" onclick="goToScreen(4)">Edit</button>
+                </div>
+              </div>
+
+              <!-- Commitment block (the goalpost) -->
+              <div class="commitment-block">
+                <div class="c-label">★ The commitment · pre-committed stop rule</div>
+                <div class="c-quote">
+                  If watch time on returning customers <strong>drops by day 24</strong> — we kill the test, stay at ₹199.<br/>
+                  If it holds — we ship ₹249.<br/>
+                  <span class="goalpost">I will not move this goalpost.</span>
+                </div>
+                <label class="c-ack">
+                  <input type="checkbox" id="ackCheckbox" onchange="toggleLaunchBtn()" />
+                  <span class="c-ack-label"><strong>I, Priya, accept these tripwires.</strong> Logged for audit and future post-mortem.</span>
+                </label>
+              </div>
+
+            </div>
+            <div class="modal-foot">
+              <button class="btn ghost" onclick="goToScreen(4)">Go back</button>
+              <button class="btn primary" id="launchBtn" aria-disabled="true" onclick="tryLaunch()">✓ Launch the test</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 6: RUNNING DAY 9 ============ -->
+      <div class="screen" id="s6">
+        <div class="container">
+          <div class="row row-between" style="margin-bottom: 20px;">
+            <div>
+              <div class="text-xs muted">Day 9 of 28 · No action needed today</div>
+              <h2 class="h1" style="margin-top: 4px;">Standard plan · ₹199 → ₹249</h2>
+            </div>
+            <div class="row">
+              <button class="btn tertiary">Pause test</button>
+            </div>
+          </div>
+
+          <div class="stat-grid three" style="margin-bottom: 16px;">
+            <div class="stat">
+              <div class="lbl">Sign-ups at ₹249</div>
+              <div class="val success">+4.1%</div>
+              <div class="sub">vs control · stable</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Watch time / customer</div>
+              <div class="val warning">−2.7%</div>
+              <div class="sub">unclear — inside noise band</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Net revenue</div>
+              <div class="val success">+1.2%</div>
+              <div class="sub">barely · could flip</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="row row-between" style="margin-bottom: 14px;">
+              <h3 class="h2">My current read on this test</h3>
+              <span class="text-xs muted">Updated 2 hours ago</span>
+            </div>
+            <div class="conf">
+              <div class="label">Confidence in <strong>"keep going"</strong></div>
+              <div class="track"><div class="fill pick" style="width: 62%;"></div></div>
+              <div class="pct pick">62%</div>
+            </div>
+            <div class="conf">
+              <div class="label">Strength of <strong>"stop now"</strong></div>
+              <div class="track"><div class="fill dissent" style="width: 38%;"></div></div>
+              <div class="pct dissent">38%</div>
+            </div>
+            <p class="text-xs muted" style="margin-top: 10px;">↑ My confidence is up 4 points since yesterday — sign-ups held strong, watch-time variance widened.</p>
+          </div>
+
+          <div class="ticker">
+            <div class="list-head">
+              <h3 class="h3">What changed in the last few days</h3>
+              <span class="pill success"><span class="dot"></span> Quiet</span>
+            </div>
+            <div class="ticker-feed">
+              <div class="ticker-item bear">
+                <div class="when">Day 9 · today</div>
+                <span class="pill warning" style="margin-right: 6px;">Against shipping</span>
+                Watch time on returning customers down 2.7%, slightly worse than yesterday's 1.9%.
+              </div>
+              <div class="ticker-item bull">
+                <div class="when">Day 8</div>
+                <span class="pill success" style="margin-right: 6px;">For shipping</span>
+                New sign-up rate held steady at +4.1%.
+              </div>
+              <div class="ticker-item neutral">
+                <div class="when">Day 7</div>
+                <span class="pill info" style="margin-right: 6px;">Noise flag</span>
+                Sunday cohort had unusually wide variance — likely weekend skew.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 7: HERO DAY 14 DECISION ============ -->
+      <div class="screen" id="s7">
+        <div class="container">
+          <div class="row row-between" style="margin-bottom: 20px;">
+            <div>
+              <div class="text-xs muted">Day 14 of 28 · Decision required</div>
+              <h2 class="h1" style="margin-top: 4px;">Time to make a call</h2>
+            </div>
+            <button class="btn outlined">Export memo</button>
+          </div>
+
+          <div class="decision-card">
+            <div class="decision-head">
+              <span class="tag">Decision memo · Day 14</span>
+              <h2>Standard plan · ₹199 vs ₹249</h2>
+              <div class="mood">"I am barely more convinced than not."</div>
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <div class="conf">
+                <div class="label"><strong>My pick — confidence</strong></div>
+                <div class="track"><div class="fill pick" style="width: 54%;"></div></div>
+                <div class="pct pick">54%</div>
+              </div>
+              <div class="conf">
+                <div class="label"><strong>Case against my pick — strength</strong></div>
+                <div class="track"><div class="fill dissent" style="width: 46%;"></div></div>
+                <div class="pct dissent">46%</div>
+              </div>
+            </div>
+
+            <div class="heads-up" style="margin-bottom: 18px;">
+              <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.007M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+              <div><strong>Heads up</strong> — on tests where sign-ups go up but watch time goes down, I've been right only <strong>58% of the time</strong> on 9 prior cases. Treat the numbers below as soft.</div>
+            </div>
+
+            <div class="two-col" style="margin-bottom: 18px;">
+              <div class="col bull">
+                <div class="col-label">My pick · Wait 10 more days</div>
+                <h6>Buy more information</h6>
+                <p>More sign-ups looks real. Watch-time drop might or might not be real. Cost of waiting 10 days: ~₹14k. Cost of shipping a real revenue drop is far bigger.</p>
+              </div>
+              <div class="col bear">
+                <div class="col-label">Strongest case against · Ship ₹249 now</div>
+                <h6>Don't lose subscribers</h6>
+                <p>Watch-time drop might just be noise. Every day we wait, we lose new subscribers we could have had. The case for waiting rests on only 4 past examples.</p>
+              </div>
+            </div>
+
+            <div class="commit-card" style="margin-bottom: 14px;">
+              <span class="commit-pill"><span class="dot"></span>If you choose to wait — what you and I agree to</span>
+              <ul class="commit-rules">
+                <li><span class="rule-bullet up">↑</span><span>If watch-time on returning customers is <strong>flat or up by Day 24</strong> → I'll recommend ship ₹249.</span></li>
+                <li><span class="rule-bullet down">↓</span><span>If it's <strong>down on Day 24</strong> → I'll recommend kill the test, stay at ₹199.</span></li>
+                <li><span class="rule-bullet hold">●</span><span>Until then I'll watch <strong>only this one signal</strong>. I won't change the rule mid-flight, even if other numbers move.</span></li>
+              </ul>
+              <label class="commit-ack" for="waitCheckbox">
+                <input type="checkbox" id="waitCheckbox" onchange="toggleWaitBtn()" />
+                <span class="commit-ack-label"><strong>Lock me to this until Day 24.</strong> You can override later, but the override will be logged.</span>
+              </label>
+            </div>
+
+            <div class="action-group">
+              <div class="action-btn primary locked" id="waitBtn" onclick="tryWait()">
+                <div class="a-label">Wait 10 more days</div>
+                <div class="a-meta">Tick the box above to enable</div>
+              </div>
+              <div class="action-btn secondary">
+                <div class="a-label">Ship ₹249 now</div>
+                <div class="a-meta">38% confidence</div>
+              </div>
+              <div class="action-btn dest">
+                <div class="a-label">Drop the test</div>
+                <div class="a-meta">8% confidence</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 8: WAITING ON ONE SIGNAL ============ -->
+      <div class="screen" id="s8">
+        <div class="container">
+          <div class="row row-between" style="margin-bottom: 20px;">
+            <div>
+              <div class="text-xs muted">Day 14 of 28 · 10 days to go</div>
+              <h2 class="h1" style="margin-top: 4px;">Waiting on one signal</h2>
+            </div>
+            <button class="btn destructive" onclick="goToScreen(7)">↺ Change my mind</button>
+          </div>
+
+          <div class="card" style="margin-bottom: 14px;">
+            <div class="row row-between" style="margin-bottom: 6px;">
+              <h3 class="h2">Watch time on returning customers</h3>
+              <span class="conf-chip warning"><span class="dot"></span>Today: −2.7%</span>
+            </div>
+            <p class="text-sm" style="color: var(--n-400); margin-bottom: 6px;">
+              If this is <strong style="color: var(--s-700);">flat or up</strong> by Day 24 → ship ₹249.
+              If it's <strong style="color: var(--d-600);">down</strong> → kill the test.
+              Today's reading is between the two — too close to call yet.
+            </p>
+
+            <div class="watch-chart">
+              <svg viewBox="0 0 800 270" preserveAspectRatio="xMidYMid meet">
+                <!-- Ship zone (above 0%) -->
+                <rect x="60" y="20" width="720" height="40" fill="#4CAF47" fill-opacity="0.07"/>
+                <!-- Kill zone (below -3%) -->
+                <rect x="60" y="180" width="720" height="40" fill="#E23318" fill-opacity="0.07"/>
+                <!-- Waiting zone (days 15-24) -->
+                <rect x="420" y="20" width="257" height="200" fill="#131A25" fill-opacity="0.04"/>
+
+                <!-- Threshold lines -->
+                <line x1="60" y1="60" x2="780" y2="60" stroke="#4CAF47" stroke-dasharray="6,4" stroke-width="1.5"/>
+                <line x1="60" y1="180" x2="780" y2="180" stroke="#E23318" stroke-dasharray="6,4" stroke-width="1.5"/>
+
+                <!-- Y-axis labels -->
+                <g font-size="11" font-family="Plus Jakarta Sans, sans-serif">
+                  <text x="54" y="24" text-anchor="end" fill="#52575E">+1%</text>
+                  <text x="54" y="64" text-anchor="end" fill="#1A7A1E" font-weight="700">0% — ship line</text>
+                  <text x="54" y="104" text-anchor="end" fill="#52575E">−1%</text>
+                  <text x="54" y="144" text-anchor="end" fill="#52575E">−2%</text>
+                  <text x="54" y="184" text-anchor="end" fill="#C21B11" font-weight="700">−3% — kill line</text>
+                </g>
+
+                <!-- Today vertical -->
+                <line x1="420" y1="20" x2="420" y2="220" stroke="#1766D6" stroke-width="1.5" stroke-dasharray="3,3"/>
+                <!-- Day 24 vertical -->
+                <line x1="677" y1="20" x2="677" y2="220" stroke="#131A25" stroke-width="2"/>
+
+                <!-- Data line days 1-14 -->
+                <path d="M 85.7 60 L 111.4 72 L 137.1 80 L 162.9 100 L 188.6 108 L 214.3 120 L 240 116 L 265.7 128 L 291.4 140 L 317.1 148 L 342.9 160 L 368.6 156 L 394.3 164 L 420 168"
+                      fill="none" stroke="#1766D6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+                <!-- Today's marker -->
+                <circle cx="420" cy="168" r="6" fill="#1766D6" stroke="#FFFFFF" stroke-width="3"/>
+                <text x="432" y="172" font-size="11" fill="#1766D6" font-weight="700" font-family="Plus Jakarta Sans, sans-serif">Today: −2.7%</text>
+
+                <!-- X-axis labels -->
+                <g font-size="11" font-family="Plus Jakarta Sans, sans-serif">
+                  <text x="85.7" y="240" text-anchor="middle" fill="#52575E">Day 1</text>
+                  <text x="240" y="240" text-anchor="middle" fill="#52575E">Day 7</text>
+                  <text x="420" y="240" text-anchor="middle" fill="#1766D6" font-weight="700">Day 14 · today</text>
+                  <text x="677" y="240" text-anchor="middle" fill="#131A25" font-weight="700">Day 24 · decision</text>
+                </g>
+                <!-- Waiting zone label -->
+                <text x="548" y="40" text-anchor="middle" font-size="10" fill="#52575E" font-family="Plus Jakarta Sans, sans-serif" font-weight="600" letter-spacing="1">WAITING · 10 DAYS</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 14px 18px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <span class="pill success"><span class="dot"></span>Quiet</span>
+            <span class="text-sm" style="flex: 1;">No action needed today. Next check-in: <strong>Day 24</strong> — I'll notify you when the rule fires.</span>
+            <button class="btn ghost sm">View audit log</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 9: SHIP DAY 24 ============ -->
+      <div class="screen" id="s9">
+        <div class="container">
+          <div class="row row-between" style="margin-bottom: 20px;">
+            <div>
+              <div class="text-xs muted">Day 24 of 28 · Stop rule cleared</div>
+              <h2 class="h1" style="margin-top: 4px;">Time to ship</h2>
+            </div>
+            <button class="btn outlined">Export memo</button>
+          </div>
+
+          <div class="decision-card">
+            <div class="decision-head">
+              <span class="tag success">Stop rule cleared · Day 24</span>
+              <h2>Standard plan · ₹199 vs ₹249</h2>
+              <div class="mood success">"Watch time recovered. The signal is clear now."</div>
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <div class="conf">
+                <div class="label"><strong>My pick — confidence</strong></div>
+                <div class="track"><div class="fill pick" style="width: 73%;"></div></div>
+                <div class="pct pick">73%</div>
+              </div>
+              <div class="conf">
+                <div class="label"><strong>Case against — strength</strong></div>
+                <div class="track"><div class="fill dissent" style="width: 27%;"></div></div>
+                <div class="pct dissent">27%</div>
+              </div>
+            </div>
+
+            <div class="heads-up success" style="margin-bottom: 18px;">
+              <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <div><strong>Update on my weak-terrain flag</strong> — at day 14 I warned I was under-calibrated on this kind of test. With watch-time recovery, the divergence pattern dissolved. I'm in firmer ground now.</div>
+            </div>
+
+            <div class="two-col" style="margin-bottom: 18px;">
+              <div class="col bull">
+                <div class="col-label">My pick · Ship ₹249</div>
+                <h6>Stop rule cleared cleanly</h6>
+                <p>Watch time on returning customers recovered to baseline (-0.3% vs control, inside noise). Sign-ups still up +4.4%. Net revenue projecting +2.1% at 90 days. The bear-case fear didn't materialise.</p>
+              </div>
+              <div class="col bear">
+                <div class="col-label">Remaining case against</div>
+                <h6>Could still revert</h6>
+                <p>10-day extension is short relative to the 90-day question. Possible but unlikely the trend reverses. The bear case is now <em>thin</em>.</p>
+              </div>
+            </div>
+
+            <div class="action-group">
+              <div class="action-btn primary pulse" onclick="goToScreen(10)">
+                <div class="a-label">✓ Ship ₹249 to all customers</div>
+                <div class="a-meta">73% confidence · hit rate at this confidence: 11/14</div>
+              </div>
+              <div class="action-btn secondary">
+                <div class="a-label">Wait another 7 days</div>
+                <div class="a-meta">marginal CI tightening</div>
+              </div>
+              <div class="action-btn dest">
+                <div class="a-label">Override · kill anyway</div>
+                <div class="a-meta">your call · logged</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 10: OUTCOME ============ -->
+      <div class="screen" id="s10">
+        <div class="container">
+          <div style="margin-bottom: 20px;">
+            <div class="text-xs muted">90 days after decision</div>
+            <h2 class="h1" style="margin-top: 4px;">Standard plan — what happened</h2>
+          </div>
+
+          <div class="outcome-banner" style="margin-bottom: 16px;">
+            <div class="o-label">✓ Held up at 90 days</div>
+            <h3>Net revenue +2.8% · retention within 1pp of baseline</h3>
+            <p>The "wait then ship" call paid off. By day 24 watch time had recovered. We shipped ₹249. The 90-day retained-revenue lift is real — small but real.</p>
+          </div>
+
+          <div class="card" style="margin-bottom: 16px;">
+            <h3 class="h2" style="margin-bottom: 16px;">How my thinking moved · replayable history</h3>
+            <div class="timeline">
+              <div class="tl-item">
+                <span class="when">Day 7</span>
+                <div class="marker"></div>
+                <div class="what">
+                  <strong>Confidence: 58% · Dissent: 42%</strong>
+                  <small>Sign-ups holding strong. Watch-time concerns starting to surface.</small>
+                </div>
+              </div>
+              <div class="tl-item hero">
+                <span class="when">Day 14 ★</span>
+                <div class="marker"></div>
+                <div class="what">
+                  <strong>Confidence: 54% · Dissent: 46% — picked Wait</strong>
+                  <small>The hardest moment. Bull and bear nearly even. Pre-committed to a stop rule. You agreed.</small>
+                </div>
+              </div>
+              <div class="tl-item">
+                <span class="when">Day 24</span>
+                <div class="marker"></div>
+                <div class="what">
+                  <strong>Confidence: 73% — picked Ship</strong>
+                  <small>Watch time recovered. Stop rule cleared. Recommended ship.</small>
+                </div>
+              </div>
+              <div class="tl-item win">
+                <span class="when">Day 90</span>
+                <div class="marker"></div>
+                <div class="what">
+                  <strong>Outcome: Held. Net revenue +2.8%</strong>
+                  <small>The recommendation held. Bear case did not materialise.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lessons">
+            <h5>What I learned · how this updates my scorecard</h5>
+            <ul>
+              <li><strong>Hit-rate on conversion-vs-watch-time tests:</strong> moves from 58% → 60% (10 prior cases now)</li>
+              <li><strong>Calibration on "Wait" recommendation:</strong> 6/9 → 7/10. Slightly more reliable than last quarter</li>
+              <li><strong>For next time:</strong> watch-time recovery in week 4 is a strong forward signal. I'll weight it more in similar tests</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SCREEN 11: UPDATED HUB ============ -->
+      <div class="screen" id="s11">
+        <div class="container">
+          <div class="row row-between" style="margin-bottom: 20px;">
+            <div>
+              <h2 class="h1">Welcome back, Priya</h2>
+              <p class="text muted" style="margin-top: 4px;">Last test shipped Day 24 · scorecard updated.</p>
+            </div>
+            <button class="btn tertiary" onclick="goToScreen(2)">+ New test from scratch</button>
+          </div>
+
+          <div class="stat-grid" style="margin-bottom: 24px;">
+            <div class="stat">
+              <div class="lbl">Tests running</div>
+              <div class="val">0</div>
+              <div class="sub">Last shipped Day 24</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">90-day hit rate</div>
+              <div class="val">1 / 1</div>
+              <div class="sub">100% · still cold-start data</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Counter-arg accuracy</div>
+              <div class="val muted">—</div>
+              <div class="sub">Not enough cases yet</div>
+            </div>
+            <div class="stat">
+              <div class="lbl">Last outcome</div>
+              <div class="val success">+₹2.4L</div>
+              <div class="sub">Standard ₹249 · held at 90d</div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 12px;">
+            <div class="row row-between">
+              <h3 class="h2">Next thing to try</h3>
+              <span class="text-xs muted">Updated based on the last test outcome</span>
+            </div>
+          </div>
+
+          <div class="suggest-card featured">
+            <div class="row row-between" style="margin-bottom: 10px;">
+              <span class="pill info"><span class="dot"></span> High priority</span>
+              <span class="conf-chip warning"><span class="dot"></span>My confidence <strong>64%</strong></span>
+            </div>
+            <h3 class="h2" style="margin-bottom: 6px;">Tier-2 city pricing · localised ₹179 vs ₹199</h3>
+            <p class="text-sm" style="margin-bottom: 10px;">Your Standard ₹249 win held cleanly in tier-1, but tier-2 conversion dropped 6%. A localised lower price could recover that loss without cannibalising tier-1.</p>
+            <div class="row" style="font-size: 12px; color: var(--n-400);">
+              <span>📊 8 comparable tests</span>
+              <span>·</span>
+              <span>~21 day runtime</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Chat side panel -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <h5>💬 Ask the agent</h5>
+    <button class="btn ghost sm" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-context">Context · viewing <strong id="chat-ctx-text">PriceLab</strong></div>
+  <div class="chat-feed">
+    <div class="chat-msg me">Why "wait" instead of ship? Sign-ups are clearly up.</div>
+    <div class="chat-msg">
+      Sign-ups being up is the strongest piece of evidence in the bull case — I agree. But if watch time is dropping, those new subs may not stick at 90 days, which would erase the lift.<br/><br/>
+      The cost of being wrong on shipping is much bigger than the cost of waiting 10 days. So I'm picking the safer side, but only at 54% confidence — I'm barely leaning.
+      <div class="receipt">📊 3 of last 4 "underpowered watch time" guardrails turned out real at n=2x</div>
+    </div>
+    <div class="chat-msg me">What if I extended for 20 days instead of 10?</div>
+    <div class="chat-msg">
+      It would tighten the watch-time confidence by another ~0.7pp, but the deferred revenue cost roughly doubles to ~₹28k. My confidence would only move from 54% → 59%.<br/><br/>
+      Diminishing returns. I'd recommend 10 days, decide on day 24.
+    </div>
+  </div>
+  <div class="chat-input">
+    <div class="input">Ask anything · "compare to last festival test…"</div>
+  </div>
+</div>
+
+<!-- Step navigator -->
+<div class="step-bar">
+  <button class="step-pill" onclick="prevScreen()" id="prevBtn">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    Previous
+  </button>
+  <div class="step-info">
+    <strong id="stepNum">1 / 11</strong>
+    <span class="meta" id="stepName">Cold start</span>
+  </div>
+  <button class="step-pill" onclick="nextScreen()" id="nextBtn">
+    Next
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+  </button>
+</div>
+
+<script>
+  const screens = [
+    { id: 's1', name: 'Cold start · welcome', context: 'Welcome · Day zero' },
+    { id: 's3', name: 'Intake · planning chat', context: 'New test · planning conversation' },
+    { id: 's2', name: 'Test hub · contextualised', context: 'Test hub' },
+    { id: 's4', name: 'Drafting · chat', context: 'Standard plan · ₹199 → ₹249' },
+    { id: 's5', name: 'Confirm launch', context: 'Standard plan · ₹199 → ₹249' },
+    { id: 's6', name: 'Running · Day 9', context: 'Standard plan · ₹199 → ₹249<span class="day">Day 9 of 28</span>' },
+    { id: 's7', name: 'Day 14 decision', context: 'Standard plan · ₹199 → ₹249<span class="day">Day 14 of 28 · Decision required</span>' },
+    { id: 's8', name: 'Stop rule armed', context: 'Standard plan · ₹199 → ₹249<span class="day">Day 14 · Stop rule armed</span>' },
+    { id: 's9', name: 'Day 24 · ship', context: 'Standard plan · ₹199 → ₹249<span class="day">Day 24 · Stop rule cleared</span>' },
+    { id: 's10', name: 'Day 90 · outcome', context: 'Standard plan · ₹199 → ₹249<span class="day">Day 90 · Outcome</span>' },
+    { id: 's11', name: 'Test hub · updated', context: 'Test hub · scorecard updated' },
+  ];
+
+  let current = 0;
+
+  function render() {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screens[current].id).classList.add('active');
+
+    document.getElementById('ctx-stage').innerHTML = screens[current].context;
+
+    document.getElementById('stepNum').textContent = `${current + 1} / ${screens.length}`;
+    document.getElementById('stepName').textContent = screens[current].name;
+
+    document.getElementById('prevBtn').classList.toggle('disabled', current === 0);
+    document.getElementById('nextBtn').classList.toggle('disabled', current === screens.length - 1);
+
+    document.getElementById('chat-ctx-text').textContent = screens[current].name;
+
+    document.querySelector('.content').scrollTop = 0;
+
+    if (screens[current].id === 's3') {
+      resetIntake();
+      renderAgentStep(0);
+    }
+  }
+
+  /* =========================
+     Intake chat — interactive
+     ========================= */
+  const intakeSteps = [
+    {
+      key: 'goal',
+      agentText: () => `<p>Hi Priya — welcome. I don't know your business yet, so I can't suggest tests blindly.</p><p>Let's plan together. <strong>What are you trying to figure out this quarter?</strong></p>`,
+      choices: [
+        'Grow revenue without losing customers',
+        'Reduce churn at the high end',
+        'Enter a new segment',
+        'Launch a new tier',
+      ],
+    },
+    {
+      key: 'plan',
+      agentText: ({ goal }) => `<p>Got it — ${goal.toLowerCase()}. <strong>Which plan are you most curious about?</strong></p>`,
+      choices: ['Standard ₹199', 'Premium ₹499', 'Annual', 'All of them'],
+    },
+    {
+      key: 'risk',
+      agentText: ({ plan }) => `<p>${plan} — that's where I have the most data, too. <strong>How aggressive are you willing to be?</strong></p>`,
+      choices: ["Conservative — don't gamble the quarter", 'Moderate', 'Bold'],
+    },
+    {
+      key: 'hidden',
+      agentText: () => `<p>Understood. Last thing — <strong>anything I won't see in the data?</strong> Competitor moves, deadlines, things execs are watching?</p>`,
+      choices: ['Nothing notable — skip'],
+      allowText: true,
+    },
+    { key: 'recap', isRecap: true },
+  ];
+
+  let intakeAnswers = { goal: null, plan: null, risk: null, hidden: null };
+  let intakeStep = 0;
+
+  function resetIntake() {
+    intakeAnswers = { goal: null, plan: null, risk: null, hidden: null };
+    intakeStep = 0;
+    const feed = document.getElementById('intakeFeed');
+    if (feed) feed.innerHTML = '';
+    hideInputRow();
+  }
+
+  function hideInputRow() {
+    const row = document.getElementById('intakeInputRow');
+    if (row) row.style.display = 'none';
+    const input = document.getElementById('intakeInput');
+    if (input) input.value = '';
+  }
+  function showInputRow() {
+    const row = document.getElementById('intakeInputRow');
+    if (row) row.style.display = 'flex';
+  }
+
+  function renderAgentStep(i) {
+    const step = intakeSteps[i];
+    if (!step) return;
+
+    if (step.isRecap) {
+      renderRecap();
+      return;
+    }
+
+    const feed = document.getElementById('intakeFeed');
+    const text = typeof step.agentText === 'function' ? step.agentText(intakeAnswers) : step.agentText;
+
+    const chipsHtml = (step.choices || [])
+      .map(c => `<span class="msg-chip" onclick="pickChoice(${JSON.stringify(c).replace(/"/g, '&quot;')})">${c}</span>`)
+      .join('');
+
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-msg agent';
+    bubble.innerHTML = `
+      <div class="msg-avatar">✦</div>
+      <div class="msg-bubble">
+        ${text}
+        <div class="msg-chips">${chipsHtml}</div>
+      </div>
+    `;
+    feed.appendChild(bubble);
+
+    if (step.allowText) showInputRow();
+    else hideInputRow();
+
+    bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+
+  function pickChoice(label) {
+    const step = intakeSteps[intakeStep];
+    if (!step) return;
+
+    // Lock the chips on the most recently rendered agent bubble
+    const feed = document.getElementById('intakeFeed');
+    const lastAgent = feed.querySelectorAll('.chat-msg.agent');
+    const target = lastAgent[lastAgent.length - 1];
+    if (target) {
+      target.querySelectorAll('.msg-chip').forEach(chip => {
+        chip.classList.add('locked');
+        if (chip.textContent.trim() === label) chip.classList.add('selected');
+        chip.onclick = null;
+      });
+    }
+
+    intakeAnswers[step.key] = label;
+
+    const userBubble = document.createElement('div');
+    userBubble.className = 'chat-msg user';
+    userBubble.innerHTML = `<div class="msg-bubble">${escapeHtml(label)}</div>`;
+    feed.appendChild(userBubble);
+
+    hideInputRow();
+    intakeStep += 1;
+    userBubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+    setTimeout(() => renderAgentStep(intakeStep), 350);
+  }
+
+  function submitIntakeText() {
+    const input = document.getElementById('intakeInput');
+    const value = (input && input.value || '').trim();
+    if (!value) return;
+
+    // If we're past the steps (recap shown), treat as freeform discussion
+    if (intakeStep >= intakeSteps.length) {
+      postUserMessage(value);
+      input.value = '';
+      setTimeout(() => postAgentAck(value), 350);
+      return;
+    }
+    pickChoice(value);
+  }
+
+  function postUserMessage(text) {
+    const feed = document.getElementById('intakeFeed');
+    const userBubble = document.createElement('div');
+    userBubble.className = 'chat-msg user';
+    userBubble.innerHTML = `<div class="msg-bubble">${escapeHtml(text)}</div>`;
+    feed.appendChild(userBubble);
+    userBubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+
+  function postAgentAck(userText) {
+    const feed = document.getElementById('intakeFeed');
+    const lower = userText.toLowerCase();
+    let reply;
+    if (lower.includes('smaller') || lower.includes('lower') || lower.includes('₹22') || lower.includes('220')) {
+      reply = `<p>Fair point. A smaller step (say ₹199 → ₹229) would lower the risk budget but tighten the signal — we'd need ~6 more days to reach the same confidence. Want me to revise Option 01 with ₹229?</p>`;
+    } else if (lower.includes('why')) {
+      reply = `<p>I ranked Option 01 first because it's the cleanest match to what you said: revenue-focused, conservative, Standard tier, and Hotstar's ₹229 gives competitive cover. The other two are valid but carry more uncertainty.</p>`;
+    } else {
+      reply = `<p>Noted. Tell me which option you want to refine, or what would change your mind on this set.</p>`;
+    }
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-msg agent';
+    bubble.innerHTML = `<div class="msg-avatar">✦</div><div class="msg-bubble">${reply}</div>`;
+    feed.appendChild(bubble);
+    bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+
+  function askToEdit(optionName) {
+    const feed = document.getElementById('intakeFeed');
+    postUserMessage(`Tweak ${optionName}`);
+    setTimeout(() => {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-msg agent';
+      bubble.innerHTML = `
+        <div class="msg-avatar">✦</div>
+        <div class="msg-bubble">
+          <p>Sure. <strong>What would you change about ${escapeHtml(optionName)}?</strong></p>
+          <span class="small">A smaller price step, a different cohort, a different stop rule — pick what's bothering you.</span>
+        </div>
+      `;
+      feed.appendChild(bubble);
+      const input = document.getElementById('intakeInput');
+      if (input) { input.placeholder = `What would you change about ${optionName}?`; input.focus(); }
+      bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 350);
+  }
+
+  // Allow Enter to submit (script is at end of body, DOM is ready)
+  (function bindIntakeInput() {
+    const input = document.getElementById('intakeInput');
+    if (!input) return;
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        submitIntakeText();
+      }
+    });
+  })();
+
+  function renderRecap() {
+    const feed = document.getElementById('intakeFeed');
+    const a = intakeAnswers;
+    const hiddenLine = a.hidden && a.hidden !== 'Nothing notable — skip'
+      ? `<div class="row"><strong>Constraint / context:</strong> ${escapeHtml(a.hidden)}</div>`
+      : `<div class="row"><strong>Constraint / context:</strong> nothing flagged</div>`;
+
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-msg agent';
+    bubble.innerHTML = `
+      <div class="msg-avatar">✦</div>
+      <div class="msg-bubble">
+        <p>Useful context. Here's what I heard:</p>
+        <div class="intake-summary">
+          <div class="row"><strong>Goal:</strong> ${escapeHtml(a.goal || '—')}</div>
+          <div class="row"><strong>Plan focus:</strong> ${escapeHtml(a.plan || '—')}</div>
+          <div class="row"><strong>Risk appetite:</strong> ${escapeHtml(a.risk || '—')}</div>
+          ${hiddenLine}
+        </div>
+        <p style="margin-top: 12px;">Want to add anything before I draft ideas? Or are we good?</p>
+        <div class="msg-chips">
+          <span class="msg-chip" onclick="postUserMessage('Add more context'); showInputRow();">Add more context</span>
+          <span class="msg-chip primary pulse" onclick="goToScreen(3)">✓ Got it, show me ideas</span>
+        </div>
+      </div>
+    `;
+    feed.appendChild(bubble);
+    showInputRow();
+    bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+
+  const intakeOptions = [
+    {
+      kind: 'best-fit',
+      tagText: 'Best fit',
+      title: 'Standard plan · ₹199 → ₹249',
+      desc: `Directly answers your goal. Standard tier audience indexes 1.3× on premium catalogue — they're choosing for content, not price. A modest increase lifts revenue with limited sign-up risk. <strong>Stays below Hotstar's ₹229 threshold for tier-2.</strong>`,
+      meta: `12 comparable tests (borrowed prior) · runtime 28 days · my confidence: 71% · <span class="badge-rec">✦ first test recommendation</span>`,
+    },
+    {
+      kind: 'backup',
+      tagText: 'Backup',
+      title: 'Annual plan discount · 10% → 15%',
+      desc: `Conservative-friendly — discounting feels "safer" than a price increase if you want to hedge. Could shift behaviour to longer commitments and reduce month-11 cancellation cluster.`,
+      meta: `8 comparable tests · runtime 35 days · confidence: 54%`,
+    },
+    {
+      kind: 'conditional',
+      tagText: 'Conditional',
+      title: 'Tier-2 cities · localised ₹179',
+      desc: `Defends against Hotstar in the markets where you said you can't price above them. Riskier because it segments your audience. <strong>I'd not recommend this as your first test</strong> — but worth queueing for after.`,
+      meta: `5 comparable tests · runtime 21 days · confidence: 48%`,
+    },
+  ];
+
+  function renderOptions() {
+    const feed = document.getElementById('intakeFeed');
+    const wrap = document.createElement('div');
+    wrap.className = 'intake-options';
+
+    const cardsHtml = intakeOptions.map(o => {
+      const titleAttr = JSON.stringify(o.title).replace(/"/g, '&quot;');
+      const isBest = o.kind === 'best-fit';
+      const actions = isBest
+        ? `
+            <button class="hyp-btn discuss" onclick="askWhy(${titleAttr})">💬 Ask why this</button>
+            <button class="hyp-btn" onclick="askToEdit(${titleAttr})">✎ Tweak it (₹229 instead?)</button>
+            <button class="hyp-btn primary" onclick="goToScreen(3)">Use as-is →</button>
+            <button class="hyp-btn remove" onclick="dismissOption(${titleAttr})">🗑 Not interested</button>
+          `
+        : `
+            <button class="hyp-btn discuss" onclick="askWhy(${titleAttr})">💬 Discuss</button>
+            <button class="hyp-btn" onclick="askToEdit(${titleAttr})">✎ Modify</button>
+            <button class="hyp-btn remove" onclick="dismissOption(${titleAttr})">🗑 Remove</button>
+          `;
+      return `
+        <div class="hyp-card ${o.kind}">
+          <span class="hyp-tag ${o.kind}">${o.tagText}</span>
+          <h4>${escapeHtml(o.title)}</h4>
+          <p class="hyp-desc">${o.desc}</p>
+          <p class="hyp-meta"><span class="icon">📊</span>${o.meta}</p>
+          <div class="hyp-actions">${actions}</div>
+        </div>
+      `;
+    }).join('');
+
+    const calloutHtml = `
+      <div class="hyp-callout">
+        <strong>What I almost suggested but didn't:</strong> Mobile-only ₹79 tier. You said conservative — that one would be a bigger bet on a new segment with high cannibalisation risk. Saving it for later.
+        <button class="hyp-btn discuss" onclick="addBackOption()">💬 Want me to add it back?</button>
+      </div>
+    `;
+
+    const differentHtml = `
+      <div class="hyp-different">
+        💬 <strong>Got a different idea?</strong> Tell me what you want to test and I'll draft a memo for it.
+      </div>
+    `;
+
+    wrap.innerHTML = cardsHtml + calloutHtml + differentHtml;
+    feed.appendChild(wrap);
+
+    const input = document.getElementById('intakeInput');
+    if (input) input.placeholder = 'Push back, ask why, or tell me to tweak any of these…';
+    showInputRow();
+
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    intakeStep = intakeSteps.length;
+  }
+
+  function askWhy(optionName) {
+    postUserMessage(`Why ${optionName}?`);
+    setTimeout(() => {
+      const reasons = {
+        'Standard plan · ₹199 → ₹249': `<p>Three reasons it's first:</p><p><strong>1.</strong> It directly maps to your goal — revenue growth without losing customers.<br/><strong>2.</strong> Hotstar at ₹229 gives you cover; ₹249 stays defensible.<br/><strong>3.</strong> I have 12 comparable priors — the strongest evidence base of the three.</p>`,
+        'Annual plan discount · 10% → 15%': `<p>It's the most conservative play — discounts feel safer than increases. But I ranked it second because it lowers ARPU short-term, which is hard to defend to Finance even if retention improves.</p>`,
+        'Tier-2 cities · localised ₹179': `<p>It defends against Hotstar in the markets you flagged. I marked it conditional because it segments your audience — cannibalisation risk if region detection isn't airtight. Not a first test, but worth queuing.</p>`,
+      };
+      const reply = reasons[optionName] || `<p>Here's my reasoning for ${escapeHtml(optionName)} — pulled from the priors and your stated constraints.</p>`;
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-msg agent';
+      bubble.innerHTML = `<div class="msg-avatar">✦</div><div class="msg-bubble">${reply}</div>`;
+      document.getElementById('intakeFeed').appendChild(bubble);
+      bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 350);
+  }
+
+  function dismissOption(optionName) {
+    postUserMessage(`Not interested in ${optionName}`);
+    setTimeout(() => {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-msg agent';
+      bubble.innerHTML = `<div class="msg-avatar">✦</div><div class="msg-bubble"><p>Noted. I'll drop ${escapeHtml(optionName)} from the list. Want me to draft a fresh option, or stick with what's left?</p></div>`;
+      document.getElementById('intakeFeed').appendChild(bubble);
+      bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 350);
+  }
+
+  function addBackOption() {
+    postUserMessage(`Add back the mobile-only ₹79 tier`);
+    setTimeout(() => {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-msg agent';
+      bubble.innerHTML = `<div class="msg-avatar">✦</div><div class="msg-bubble"><p>Sure — I'll add it as a fourth option. Heads up: it tests a new segment, not your existing pricing. Are you OK with the cannibalisation risk before I draft it?</p></div>`;
+      document.getElementById('intakeFeed').appendChild(bubble);
+      bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 350);
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function nextScreen() {
+    if (current < screens.length - 1) { current++; render(); }
+  }
+  function prevScreen() {
+    if (current > 0) { current--; render(); }
+  }
+  function goToScreen(n) {
+    current = n - 1;
+    render();
+  }
+
+  function toggleChat() {
+    document.getElementById('chatPanel').classList.toggle('open');
+  }
+  document.getElementById('ask-agent').addEventListener('click', toggleChat);
+
+  // Launch confirmation: checkbox gates the Launch button
+  function toggleLaunchBtn() {
+    const cb = document.getElementById('ackCheckbox');
+    const btn = document.getElementById('launchBtn');
+    if (!cb || !btn) return;
+    if (cb.checked) {
+      btn.removeAttribute('aria-disabled');
+    } else {
+      btn.setAttribute('aria-disabled', 'true');
+    }
+  }
+  function tryLaunch() {
+    const cb = document.getElementById('ackCheckbox');
+    if (cb && !cb.checked) return;
+    goToScreen(6);
+  }
+
+  // Slide 7: gate Wait button on commitment checkbox
+  function toggleWaitBtn() {
+    const cb = document.getElementById('waitCheckbox');
+    const btn = document.getElementById('waitBtn');
+    if (!cb || !btn) return;
+    const meta = btn.querySelector('.a-meta');
+    if (cb.checked) {
+      btn.classList.remove('locked');
+      if (meta) meta.textContent = '9 past calls like this · 6 resolved cleanly';
+    } else {
+      btn.classList.add('locked');
+      if (meta) meta.textContent = 'Tick the box above to enable';
+    }
+  }
+  function tryWait() {
+    const cb = document.getElementById('waitCheckbox');
+    if (cb && !cb.checked) return;
+    goToScreen(8);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+    if (e.key === 'ArrowRight') nextScreen();
+    if (e.key === 'ArrowLeft') prevScreen();
+  });
+
+  render();
+</script>
+
+</body>
+</html>
